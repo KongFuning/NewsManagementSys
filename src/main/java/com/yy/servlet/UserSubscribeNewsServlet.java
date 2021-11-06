@@ -54,25 +54,40 @@ public class UserSubscribeNewsServlet extends HttpServlet {
                         "</td><td name=\"price\">"+newspaper.getOffer()+
                         "</td><td><input type=\"checkbox\" name=\"one\"  value=\""+newspaper.getOffer()+"\"><input type=\"hidden\" name=\"hidden\" value=\""+newspaper.getId()+"\"></td>");
             }
-            sb.append("<tr><td>合test计:</td><td colspan=\"2\"><span id=\"ids\" name=\"ids\"></span></td><td><p><span id=\"sumMoney\"></span></p></td>\n" +
+            sb.append("<tr><td>合计:</td><td colspan=\"2\"><span id=\"ids\" name=\"ids\"></span></td><td><p><span id=\"sumMoney\"></span></p></td>\n" +
                     "\t</table>\n" +
                     "\t<input id=\"addNews\" name=\"addNews\" type=\"submit\" value=\"订阅\">\n" +
                     "</form>\n" +
-                    "<script type=\"text/javascript\" src=\"js/myJS.js\"></script>"+
-                    "<script type=\"text/javascript\" src=\"js/jquery-1.4.2.min.js\"></script>\n" +
                     "<script>\n" +
-                    "\t$(\"#addNews\").click(function(){\n" +
-                    "\t\t\t\tvar list = $(\"[name=one]\");\n" +
-                    "\t\tconsole.log(list);\n" +
-                    "\t});\n" +
+                    "\tfunction calculateMoney() {\n" +
+                    "\tvar sum = 0;\n" +
+                    "\tvar ids = [];\n" +
+                    "\tvar chkItems = document.getElementsByName(\"one\");\n" +
+                    "\tvar idItems = document.getElementsByName(\"hidden\");\n" +
+                    "\tfor (var i = 0; i < chkItems.length; i++) {\n" +
+                    "\t    if (chkItems[i].checked) {\n" +
+                    "\t      sum += parseInt(chkItems[i].value);\n" +
+                    "\t      ids.push(idItems[i].value);\n" +
+                    "\t    }\n" +
+                    "\t}\n" +
+                    "\tvar sumMoneyObj = document.getElementById(\"sumMoney\");\n" +
+                    "\tvar list = document.getElementById(\"ids\");\n" +
+                    "\tlist.innerHTML = ids;\n" +
+                    "\tsumMoneyObj.innerHTML = sum +\" ￥\";\n" +
+                    "\t}\n" +
+                    "\n" +
+                    "\t//给每个报刊复选框加上自动统计功能\n" +
+                    "\tfunction iniEvent() {\n" +
+                    "\t  var chkItems = document.getElementsByName(\"one\");\n" +
+                    "\t  for (var i = 0; i < chkItems.length; i++) {\n" +
+                    "\t    \tchkItems[i].onclick = calculateMoney;\n" +
+                    "\t \t }      \n" +
+                    "\t}" +
                     "</script>"+
                     "</body>\n" +
                     "</html>" );
-            // sb.append("<script type=\\\"text/javascript\\\" src=\\\"js/myJS.js\\\"></script>");
             PrintWriter out = resp.getWriter();
             out.write(sb.toString());
-
-            // out.println("<script type=\"text/javascript\" src=\"js/myJS.js\"></script>");
 
         }else {
             //会话失效
