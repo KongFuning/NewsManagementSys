@@ -28,7 +28,7 @@ public class UserSubscribeNewsServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
 
-        //获取用户登录后传来的adminUser
+        //获取用户登录后传来的User
         HttpSession session = req.getSession();
         User user = (User)session.getAttribute("user");
 
