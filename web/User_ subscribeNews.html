@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="css/admin.css">
+	<title>订阅报刊</title>
+</head>
+<body onload="iniEvent()">
+<form action="#" method="post" name="myForm">
+	<table id="topic_table">
+		<tr><th>报刊代号</th><th>报刊名</th><th>季度报价</th><th>订阅</th>
+		<tr><td name="id">1</td><td name="name">《地狱火》</td><td name="price">100.0</td><td><input type="checkbox" name="one"  value="100"><input type="hidden" name="hidden" value="1"></td>
+		<tr><td name="id">2</td><td name="name">《地狱火》</td><td name="price">200.0</td><td><input type="checkbox" name="one"  value="200"><input type="hidden" name="hidden" value="2"></td>
+		<tr><td name="id">3</td><td name="name">《地狱火》</td><td name="price">300.0</td><td><input type="checkbox" name="one"  value="300"><input type="hidden" name="hidden" value="3"></td>
+		<tr><td name="id">4</td><td name="name">《地狱火》</td><td name="price">400.0</td><td><input type="checkbox" name="one"  value="400"><input type="hidden" name="hidden" value="4"></td>
+		<tr><td name="id">5</td><td name="name">《地狱火》</td><td name="price">500.0</td><td><input type="checkbox" name="one"  value="500"><input type="hidden" name="hidden" value="5"></td>
+		<tr><td name="id">6</td><td name="name">《地狱火》</td><td name="price">600.0</td><td><input type="checkbox" name="one"  value="600"><input type="hidden" name="hidden" value="6"></td>
+		<tr><td name="id">7</td><td name="name">《地狱火》</td><td name="price">700.0</td><td><input type="checkbox" name="one"  value="700"><input type="hidden" name="hidden" value="7"></td>
+		<tr><td name="id">8</td><td name="name">《地狱火》</td><td name="price">800.0</td><td><input type="checkbox" name="one"  value="800"><input type="hidden" name="hidden" value="8"></td>
+		<tr><td name="id">9</td><td name="name">《地狱火》</td><td name="price">900.0</td><td><input type="checkbox" name="one"  value="900"><input type="hidden" name="hidden" value="9"></td>
+		<tr><td>合计:</td><td colspan="2"><span id="ids" name="ids"></span></td><td><p><span id="sumMoney"></span></p></td>
+	</table>
+	<input id="addNews" name="addNews" type="submit" value="订阅">
+</form>
+</body>
+</html>
+<script type="text/javascript" src="js/myJS.js"></script>
+<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+<script>
+	$("#addNews").click(function(){
+		console.log("test");
+	});
+</script>
