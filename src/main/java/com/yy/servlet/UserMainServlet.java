@@ -46,8 +46,8 @@ public class UserMainServlet extends HttpServlet {
                     "            <div class=\"layui-logo kit-logo-mobile\">K</div>\n" +
                     "            <ul class=\"layui-nav layui-layout-right kit-nav\">\n" +
                     "                <li class=\"layui-nav-item\">\n" +
-                    "                    <a href=\"javascript:;\">\n" +
-                    "                        "+user.getUser_name()+",欢迎您\n" +
+                    "                    <a href=\"/updateUserInfoServlet\">\n" +
+                    "                        个人中心&nbsp;&nbsp;&nbsp;&nbsp;"+user.getUser_name()+",欢迎您\n" +
                     "                    </a>\n" +
                     "                </li>\n" +
                     "                <li class=\"layui-nav-item\"><a href=\"/exitServlet\"><i class=\"fa fa-sign-out\" aria-hidden=\"true\"></i> 注销</a></li>\n" +
@@ -59,7 +59,7 @@ public class UserMainServlet extends HttpServlet {
                     "                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->\n" +
                     "                <ul class=\"layui-nav layui-nav-tree\" lay-filter=\"kitNavbar\" kit-navbar>\n" +
                     "                    <li class=\"layui-nav-item\">\n" +
-                    "                        <a href=\"/userSubscribeNewsServlet\" data-url=\"/userSubscribeNewsServlet\" data-name=\"table\" kit-loader><i class=\"fa fa-plug\" aria-hidden=\"true\"></i><span> 订阅报刊</span></a>\n" +
+                    "                        <a href=\"/userSubscribeNewsServlet\" data-url=\"#\" data-name=\"table\" kit-loader><i class=\"fa fa-plug\" aria-hidden=\"true\"></i><span> 订阅报刊</span></a>\n" +
                     "                    </li>\n" +
                     "                    <li class=\"layui-nav-item\">\n" +
                     "                        <a href=\"javascript:;\" data-url=\"/userSeachOrderServlet\" data-name=\"form\" kit-loader><i class=\"fa fa-plug\" aria-hidden=\"true\"></i><span> 查询订阅</span></a>\n" +
@@ -75,11 +75,12 @@ public class UserMainServlet extends HttpServlet {
                     "            <div style=\"padding: 15px;\">请点击左侧菜单...</div>\n" +
                     "        </div>\n" +
                     "    </div>\n" +
+                    "\n" +
                     "    <script type=\"text/javascript\">\n" +
                     "        var cnzz_protocol = ((\"https:\" == document.location.protocol) ? \" https://\" : \" http://\");\n" +
                     "        document.write(unescape(\"%3Cspan id='cnzz_stat_icon_1264021086'%3E%3C/span%3E%3Cscript src='\" + cnzz_protocol + \"s22.cnzz.com/z_stat.php%3Fid%3D1264021086%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E\"));\n" +
                     "    </script>\n" +
-                    "    <script src=\"./plugins/layui/layui.js\"></script>\n" +
+                    "    <script src=\"plugins/layui/layui.js\"></script>\n" +
                     "    <script>\n" +
                     "        var message;\n" +
                     "        layui.config({\n" +
@@ -106,7 +107,6 @@ public class UserMainServlet extends HttpServlet {
                     "        });\n" +
                     "    </script>\n" +
                     "</body>\n" +
-                    "<script type=\"text/javascript\" src=\"js/myJS.js\"></script>\n" +
                     "</html>\n");
             resp.getWriter().write(sb.toString());
 

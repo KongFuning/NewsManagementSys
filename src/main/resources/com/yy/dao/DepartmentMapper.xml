@@ -5,4 +5,7 @@
 
 <mapper namespace="com.yy.dao.DepartmentMapper">
 
+    <select id="getDepartName" parameterType="int" resultType="String">
+        select name from department where id = #{id};
+    </select>
 </mapper>

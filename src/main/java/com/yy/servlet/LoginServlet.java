@@ -46,9 +46,10 @@ public class LoginServlet extends HttpServlet {
                 map.put("userName",userName);
                 map.put("passWord",passWord);
                 User user1 = new User();
-                user1.setId(userService.getUserByName(userName).getId());
-                user1.setUser_name(userName);
-                user1.setUser_password(passWord);
+//                user1.setId(userService.getUserByName(userName).getId());
+//                user1.setUser_name(userName);
+//                user1.setUser_password(passWord);
+                user1 = userService.getUserByName(userName);
                 Integer result = userService.checkUser(map);
                 if(result != null){
                     //登录成功 将user保存到session
