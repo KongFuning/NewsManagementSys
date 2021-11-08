@@ -38,7 +38,9 @@ public class ConfirmUpdateUserInfoServlet extends HttpServlet {
         String address = req.getParameter("address");
         int departId = Integer.parseInt(req.getParameter("userOrAdmin"));
 
+
         User user1 = new User();
+        user1.setId(user.getId());
         user1.setUser_name(userName);
         user1.setUser_password(passWord);
         user1.setUser_realname(realName);
@@ -50,8 +52,8 @@ public class ConfirmUpdateUserInfoServlet extends HttpServlet {
         Integer result = userService.updateUser(user1);
         if(result != null){
             //修改成功
-            resp.getWriter().print("<script language=\"javascript\">alert(\"修改成功！\");" +
-                    "location.href='/updateUserInfoServlet'</script>");
+            resp.getWriter().print("<script language=\"javascript\">alert(\"修改成功,请重新登录！\");" +
+                    "location.href='/loginServlet'</script>");
         }else {
             //修改失败
             resp.getWriter().print("<script language=\"javascript\">alert(\"修改失败！\");" +
