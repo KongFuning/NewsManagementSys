@@ -8,7 +8,7 @@
 <body onload="iniEvent()">
 <form action="#" method="post" name="myForm">
 	<table id="topic_table">
-		<tr><th>报刊代号</th><th>报刊名</th><th>订阅份数</th><th>订阅月数</th>
+		<tr><th>报刊代号</th><th>报刊名</th><th>季度报价</th><th>订阅</th>
 		<tr><td name="id">1</td><td name="name">《地狱火》</td><td name="num">100.0</td><td><input type="checkbox" name="one"  value="100"><input type="hidden" name="hidden" value="1"></td>
 		<tr><td name="id">2</td><td name="name">《地狱火》</td><td name="num">200.0</td><td><input type="checkbox" name="one"  value="200"><input type="hidden" name="hidden" value="2"></td>
 		<tr><td name="id">3</td><td name="name">《地狱火》</td><td name="num">300.0</td><td><input type="checkbox" name="one"  value="300"><input type="hidden" name="hidden" value="3"></td>
@@ -20,14 +20,27 @@
 		<tr><td name="id">9</td><td name="name">《地狱火》</td><td name="num">900.0</td><td><input type="checkbox" name="one"  value="900"><input type="hidden" name="hidden" value="9"></td>
 		<tr><td>合计:</td><td colspan="2"><span id="ids" name="ids"></span></td><td><p><span id="sumMoney"></span></p></td>
 	</table>
-	<input id="addNews" name="addNews" type="submit" value="订阅">
+	<input name="addNews" type="button" value="订阅">
 </form>
 </body>
 </html>
-<script type="text/javascript" src="js/myJS.js"></script>
 <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
 <script>
-	$("#addNews").click(function(){
-		console.log("test");
-	});
+	function calculateNewsId() {
+		var ids = [];
+		var chkItems = document.getElementsByName("one");
+		var idItems = document.getElementsByName("hidden");
+		for (var i = 0; i < chkItems.length; i++) {
+			if (chkItems[i].checked) {
+				ids.push(idItems[i].value);
+			}
+		}
+		console.log(ids);
+	}
+	function iniEvent() {
+		var chkItems = document.getElementsByName("one");
+		for (var i = 0; i < chkItems.length; i++) {
+			chkItems[i].onclick = calculateNewsId;
+		}
+	}
 </script>
