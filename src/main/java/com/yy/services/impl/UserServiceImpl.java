@@ -46,4 +46,9 @@ public class UserServiceImpl implements UserServiceMapper {
     public Integer getUserNum() {
         return getSqlSession().getMapper(UserMapper.class).getUserNum();
     }
+
+    @Override
+    public Integer updateUser(User user) {
+        return getSqlSession().getMapper(UserMapper.class).updateUser(user);
+    }
 }

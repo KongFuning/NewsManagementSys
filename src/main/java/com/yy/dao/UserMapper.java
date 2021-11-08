@@ -25,4 +25,7 @@ public interface UserMapper {
     //根据用户名和密码查询是否匹配数据库 （登录判断）
     Integer checkUser(Map map);
 
+    //更新用户信息
+    Integer updateUser(User user);
+
 }

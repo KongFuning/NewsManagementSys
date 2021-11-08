@@ -24,4 +24,7 @@ public interface UserServiceMapper {
 
     //查询用户总数
     Integer getUserNum();
+
+    //更新用户信息
+    Integer updateUser(User user);
 }

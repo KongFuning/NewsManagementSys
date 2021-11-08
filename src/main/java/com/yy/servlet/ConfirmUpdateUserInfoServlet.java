@@ -1,6 +1,7 @@
 package com.yy.servlet;
 
 import com.yy.pojo.User;
+import com.yy.services.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +14,7 @@ import java.io.IOException;
 @WebServlet("/confirmUpdateUserInfoServlet")
 public class ConfirmUpdateUserInfoServlet extends HttpServlet {
 
+    UserServiceImpl userService = new UserServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req,resp);
@@ -30,6 +32,31 @@ public class ConfirmUpdateUserInfoServlet extends HttpServlet {
 
         String userName = req.getParameter("userName");
         String passWord = req.getParameter("passWord");
+        String realName = req.getParameter("realName");
+        String cardId = req.getParameter("cardId");
+        String phone = req.getParameter("phone");
+        String address = req.getParameter("address");
+        int departId = Integer.parseInt(req.getParameter("userOrAdmin"));
+
+        User user1 = new User();
+        user1.setUser_name(userName);
+        user1.setUser_password(passWord);
+        user1.setUser_realname(realName);
+        user1.setUser_cardid(cardId);
+        user1.setUser_phone(phone);
+        user1.setUser_address(address);
+        user1.setDepart_id(departId);
+
+        Integer result = userService.updateUser(user1);
+        if(result != null){
+            //修改成功
+            resp.getWriter().print("<script language=\"javascript\">alert(\"修改成功！\");" +
+                    "location.href='/updateUserInfoServlet'</script>");
+        }else {
+            //修改失败
+            resp.getWriter().print("<script language=\"javascript\">alert(\"修改失败！\");" +
+                    "location.href='/updateUserInfoServlet'</script>");
+        }
 
     }
 }
