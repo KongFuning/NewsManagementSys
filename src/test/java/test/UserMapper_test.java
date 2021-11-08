@@ -30,7 +30,7 @@ public class UserMapper_test {
 
     @Test
     public void getUserByName_test(){
-        User user = mapper.getUserByName("测试用户");
+        User user = mapper.getUserByName("yyyyy");
         System.out.println(user);
     }
 

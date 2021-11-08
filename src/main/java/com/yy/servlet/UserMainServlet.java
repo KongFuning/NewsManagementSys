@@ -62,7 +62,7 @@ public class UserMainServlet extends HttpServlet {
                     "                        <a href=\"/userSubscribeNewsServlet\" data-url=\"/userSubscribeNewsServlet\" data-name=\"table\" kit-loader><i class=\"fa fa-plug\" aria-hidden=\"true\"></i><span> 订阅报刊</span></a>\n" +
                     "                    </li>\n" +
                     "                    <li class=\"layui-nav-item\">\n" +
-                    "                        <a href=\"javascript:;\" data-url=\"#\" data-name=\"form\" kit-loader><i class=\"fa fa-plug\" aria-hidden=\"true\"></i><span> 查询订阅</span></a>\n" +
+                    "                        <a href=\"javascript:;\" data-url=\"/userSeachOrderServlet\" data-name=\"form\" kit-loader><i class=\"fa fa-plug\" aria-hidden=\"true\"></i><span> 查询订阅</span></a>\n" +
                     "                    </li>\n" +
                     "                    <li class=\"layui-nav-item\">\n" +
                     "                        <a href=\"javascript:;\" data-url=\"#\" data-name=\"form\" kit-loader><i class=\"fa fa-plug\" aria-hidden=\"true\"></i><span> 统计</span></a>\n" +
@@ -109,6 +109,11 @@ public class UserMainServlet extends HttpServlet {
                     "<script type=\"text/javascript\" src=\"js/myJS.js\"></script>\n" +
                     "</html>\n");
             resp.getWriter().write(sb.toString());
+
+            //再存入一次user
+            HttpSession httpSession = req.getSession();
+            httpSession.setAttribute("user",user);
+
         }else {
             //会话失效
             resp.sendRedirect("index.html");

@@ -4,5 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.yy.dao.OrdersMapper">
-
+    <select id="getNewspaperByUserId" parameterType="int" resultType="Newspaper">
+        select N.* from orders as O,newspaper as N where user_id=#{user_id} and news_id=N.id order by N.id;
+    </select>
 </mapper>
