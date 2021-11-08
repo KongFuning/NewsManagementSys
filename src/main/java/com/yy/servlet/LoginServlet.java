@@ -83,7 +83,7 @@ public class LoginServlet extends HttpServlet {
                     HttpSession httpSession = req.getSession();
                     httpSession.setAttribute("adminUser",adminUser1);
                     //重定向至管理员系统首页
-                    resp.sendRedirect("AdminMain.jsp");
+                    resp.sendRedirect("AdminMain.html");
                 }else {
                     //登录失败 提示密码错误
                     resp.getWriter().print("<script language=\"javascript\">alert(\"密码错误！\");" +

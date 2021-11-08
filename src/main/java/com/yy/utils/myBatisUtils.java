@@ -20,7 +20,7 @@ public class myBatisUtils {
         }
     }
 
-    //获取SqlSession对象
+    //获取sqlSessionFactory对象
     public static SqlSessionFactory getSqlSessionFactory(){
         return sqlSessionFactory;
     }
