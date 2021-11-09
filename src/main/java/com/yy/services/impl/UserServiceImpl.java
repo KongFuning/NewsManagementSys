@@ -43,6 +43,11 @@ public class UserServiceImpl implements UserServiceMapper {
     }
 
     @Override
+    public User getUserById(int id) {
+        return getSqlSession().getMapper(UserMapper.class).getUserById(id);
+    }
+
+    @Override
     public Integer getUserNum() {
         return getSqlSession().getMapper(UserMapper.class).getUserNum();
     }

@@ -22,6 +22,9 @@ public interface UserServiceMapper {
     //添加用户 所有信息
     Integer addUserAll(User user);
 
+    //根据id获取用户
+    User getUserById(int id);
+
     //查询用户总数
     Integer getUserNum();
 

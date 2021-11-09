@@ -2,7 +2,9 @@ package com.yy.servlet;
 
 
 import com.yy.pojo.AdminUser;
+import com.yy.pojo.Newspaper;
 import com.yy.services.impl.OrdersServiceImpl;
+import com.yy.services.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +18,7 @@ import java.util.List;
 @WebServlet("/classificationQueryServlet")
 public class ClassificationQueryServlet extends HttpServlet {
     OrdersServiceImpl ordersService = new OrdersServiceImpl();
+    UserServiceImpl userService = new UserServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req,resp);
@@ -39,6 +42,31 @@ public class ClassificationQueryServlet extends HttpServlet {
             if(classify == 1){
                 //先查出所有订阅了报刊的用户
                 List<Integer> users = ordersService.getAllUsers();
+                sb.append("<!DOCTYPE html>\n" +
+                        "<html>\n" +
+                        "<head>\n" +
+                        "\t<meta charset=\"UTF-8\">\n" +
+                        "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"css/admin.css\">\n" +
+                        "\t<title>分类查询——人员</title>\n" +
+                        "</head>\n" +
+                        "<body onload=\"iniEvent()\">\n" +
+                        "<form action=\"#\" method=\"post\" name=\"myForm\">\n" +
+                        "\t<table id=\"topic_table\">");
+                for (Integer userId : users) {
+                    List<Newspaper> newspaperByUserId = ordersService.getNewspaperByUserId(userId);
+                    sb.append("<tr><th>报刊代号</th><th>报刊名</th>\n" +
+                            "\t\t<tr><td colspan=\"2\" style=\"font-weight:bold;text-align: left\" >用户："+
+                            userService.getUserById(userId).getUser_name()+"</td></tr>");
+                    for (Newspaper newspaper : newspaperByUserId) {
+                        sb.append("<tr><td name=\"id\">"+newspaper.getId()+
+                                "</td><td name=\"name\">"+newspaper.getName()+"</td></tr>\n");
+                    }
+                }
+                sb.append("</table>\n" +
+                        "</form>\n" +
+                        "</body>\n" +
+                        "</html>");
+                resp.getWriter().write(sb.toString());
 
             }
             //2.按报刊查询

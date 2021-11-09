@@ -13,6 +13,9 @@ public interface UserMapper {
     //根据用户名查询用户
     User getUserByName(String username);
 
+    //根据id获取用户
+    User getUserById(int id);
+
     //查询用户总数
     Integer getUserNum();
 
