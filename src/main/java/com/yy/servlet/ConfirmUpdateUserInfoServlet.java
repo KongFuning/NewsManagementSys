@@ -36,8 +36,15 @@ public class ConfirmUpdateUserInfoServlet extends HttpServlet {
         String cardId = req.getParameter("cardId");
         String phone = req.getParameter("phone");
         String address = req.getParameter("address");
-        int departId = Integer.parseInt(req.getParameter("userOrAdmin"));
-
+        String depart = req.getParameter("userOrAdmin");
+        //为了修改信息时不修改部门的时候，不会出现默认值格式类型转换错误
+        System.out.println(depart);
+        int departId;
+        if(depart == null){
+            departId = user.getDepart_id();
+        }else {
+            departId = Integer.parseInt(req.getParameter("userOrAdmin"));
+        }
 
         User user1 = new User();
         user1.setId(user.getId());
@@ -53,7 +60,7 @@ public class ConfirmUpdateUserInfoServlet extends HttpServlet {
         if(result != null){
             //修改成功
             resp.getWriter().print("<script language=\"javascript\">alert(\"修改成功,请重新登录！\");" +
-                    "location.href='/loginServlet'</script>");
+                    "location.href='index.html'</script>");
         }else {
             //修改失败
             resp.getWriter().print("<script language=\"javascript\">alert(\"修改失败！\");" +
