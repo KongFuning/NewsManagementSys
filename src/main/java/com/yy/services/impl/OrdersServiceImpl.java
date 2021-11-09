@@ -14,8 +14,14 @@ public class OrdersServiceImpl implements OrdersServiceMapper {
     public SqlSession getSqlSession() {
         return sqlSessionFactory.openSession(true);
     }
+
     @Override
     public List<Newspaper> getNewspaperByUserId(int user_id) {
         return getSqlSession().getMapper(OrdersMapper.class).getNewspaperByUserId(user_id);
+    }
+
+    @Override
+    public List<Integer> getAllUsers() {
+        return getSqlSession().getMapper(OrdersMapper.class).getAllUsers();
     }
 }

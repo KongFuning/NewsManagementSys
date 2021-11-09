@@ -23,9 +23,17 @@ public class OrdersMapper_test {
 
     @Test
     public void getNewspaperByUserId_test(){
-        List<Newspaper> newspaperByUserId = mapper.getNewspaperByUserId(15);
+        List<Newspaper> newspaperByUserId = mapper.getNewspaperByUserId(9);
         for (Newspaper newspaper : newspaperByUserId) {
             System.out.println(newspaper);
+        }
+    }
+
+    @Test
+    public void getAllUsers_test(){
+        List<Integer> allUsers = mapper.getAllUsers();
+        for (Integer allUser : allUsers) {
+            System.out.println(allUser);
         }
     }
 

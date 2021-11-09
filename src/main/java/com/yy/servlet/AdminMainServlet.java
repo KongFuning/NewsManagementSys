@@ -65,6 +65,9 @@ public class AdminMainServlet extends HttpServlet {
                     "                    <li class=\"layui-nav-item\">\n" +
                     "                        <a href=\"javascript:;\" data-url=\"/adminNewsManageServlet\" data-name=\"form\" kit-loader><i class=\"fa fa-plug\" aria-hidden=\"true\"></i><span> 报刊管理</span></a>\n" +
                     "                    </li>\n" +
+                    "                    <li class=\"layui-nav-item\">\n" +
+                    "                        <a href=\"javascript:;\" data-url=\"ClassificationQuery.html\" data-name=\"form\" kit-loader><i class=\"fa fa-plug\" aria-hidden=\"true\"></i><span> 查 询</span></a>\n" +
+                    "                    </li>" +
                     "                </ul>\n" +
                     "            </div>\n" +
                     "        </div>\n" +

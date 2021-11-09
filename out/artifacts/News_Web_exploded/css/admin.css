@@ -69,7 +69,7 @@ td{
 	font-size: 12px;
 	margin: auto;
 	margin-top: 15px;
-	margin-left: 15px;
+	margin-left: 20px;
 	text-align: center;
 }
 #depart{
@@ -80,6 +80,15 @@ td{
 	-webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
 	box-shadow:inset 0px 1px 1px rgba(0,0,0,0.075), 0px 0px 8px rgba(102,175,233,0.6);
 	padding-left: 10px;
+}
+#classify{
+	background-color: white;
+	border-color: white;
+	border-radius: 10px;
+	width: 100px;
+	height: 40px;
+	padding-left: 20px;
+	margin-left: 20px;
 }
 
 
