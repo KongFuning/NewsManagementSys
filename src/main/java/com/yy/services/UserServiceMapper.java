@@ -30,4 +30,7 @@ public interface UserServiceMapper {
 
     //更新用户信息
     Integer updateUser(User user);
+
+    //根据部门id查询用户
+    List<User> getAllUserByDepartId(int id);
 }

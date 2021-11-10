@@ -56,4 +56,9 @@ public class UserServiceImpl implements UserServiceMapper {
     public Integer updateUser(User user) {
         return getSqlSession().getMapper(UserMapper.class).updateUser(user);
     }
+
+    @Override
+    public List<User> getAllUserByDepartId(int id) {
+        return getSqlSession().getMapper(UserMapper.class).getAllUserByDepartId(id);
+    }
 }

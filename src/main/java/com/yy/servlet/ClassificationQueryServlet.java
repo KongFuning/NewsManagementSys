@@ -2,8 +2,10 @@ package com.yy.servlet;
 
 
 import com.yy.pojo.AdminUser;
+import com.yy.pojo.Department;
 import com.yy.pojo.Newspaper;
 import com.yy.pojo.User;
+import com.yy.services.impl.DepartmentServiceImpl;
 import com.yy.services.impl.OrdersServiceImpl;
 import com.yy.services.impl.UserServiceImpl;
 import javax.servlet.ServletException;
@@ -19,6 +21,7 @@ import java.util.List;
 public class ClassificationQueryServlet extends HttpServlet {
     OrdersServiceImpl ordersService = new OrdersServiceImpl();
     UserServiceImpl userService = new UserServiceImpl();
+    DepartmentServiceImpl departmentService = new DepartmentServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req,resp);
@@ -53,13 +56,14 @@ public class ClassificationQueryServlet extends HttpServlet {
                         "\t<table id=\"topic_table\">");
                 for (Integer userId : users) {
                     List<Newspaper> newspaperByUserId = ordersService.getNewspaperByUserId(userId);
-                    sb.append("<tr><th>报刊代号</th><th>报刊名</th>\n" +
-                            "\t\t<tr><td colspan=\"2\" style=\"font-weight:bold;text-align: left\" >用户："+
-                            userService.getUserById(userId).getUser_name()+"</td></tr>");
+                    sb.append("<tr><td colspan=\"2\" style=\"font-weight:bold;text-align: left\" >用户："+
+                            userService.getUserById(userId).getUser_name()+"</td></tr>\n" +
+                            "\t\t<tr><th>报刊代号</th><th>报刊名</th>");
                     for (Newspaper newspaper : newspaperByUserId) {
                         sb.append("<tr><td name=\"id\">"+newspaper.getId()+
                                 "</td><td name=\"name\">"+newspaper.getName()+"</td></tr>\n");
                     }
+                    sb.append("<tr><td colspan=\"2\" ><hr style=\"height: 3px; border: #D4CBCB; background: #D4CBCB;\"></td></tr>");
                 }
                 sb.append("</table>\n" +
                         "</body>\n" +
@@ -89,6 +93,7 @@ public class ClassificationQueryServlet extends HttpServlet {
                         sb.append("<tr><td name=\"id\">"+user.getId()+
                                 "</td><td name=\"name\">"+user.getUser_name()+"</td></tr>");
                     }
+                    sb.append("<tr><td colspan=\"2\" ><hr style=\"height: 3px; border: #D4CBCB; background: #D4CBCB;\"></td></tr>");
                 }
                 sb.append("\t</table>\n" +
                         "</body>\n" +
@@ -97,7 +102,37 @@ public class ClassificationQueryServlet extends HttpServlet {
             }
             //3.按部门查询
             if(classify == 3){
-
+                //先查出所有的部门
+                List<Department> allDepartment = departmentService.getAllDepartment();
+                sb.append("<!DOCTYPE html>\n" +
+                        "<html>\n" +
+                        "<head>\n" +
+                        "\t<meta charset=\"UTF-8\">\n" +
+                        "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"css/admin.css\">\n" +
+                        "\t<title>分类查询——部门</title>\n" +
+                        "</head>\n" +
+                        "<body>\n" +
+                        "<table id=\"topic_table\">");
+                for (Department department : allDepartment) {
+                    sb.append("<tr><td colspan=\"2\" style=\"font-weight:bold;text-align: left\" >部门："+
+                            department.getName()+"</td></tr>");
+                    List<User> allUserByDepartId = userService.getAllUserByDepartId(department.getId());
+                    for (User user : allUserByDepartId) {
+                        sb.append("\t<tr><td colspan=\"2\" style=\"font-weight:bold;text-align: left\" >用户："+
+                                user.getUser_name()+"</td></tr>");
+                        sb.append("\t<tr><th>报刊代号</th><th>报刊名</th>");
+                        List<Newspaper> newspaperByUserId = ordersService.getNewspaperByUserId(user.getId());
+                        for (Newspaper newspaper : newspaperByUserId) {
+                            sb.append("<tr><td name=\"id\">"+newspaper.getId()+
+                                    "</td><td name=\"name\">"+newspaper.getName()+"</td></tr>\n\n\n");
+                        }
+                        sb.append("<tr><td colspan=\"2\" ><hr style=\"height: 3px; border: #D4CBCB; background: #D4CBCB;\"></td></tr>");
+                    }
+                }
+                sb.append("</table>\n" +
+                        "</body>\n" +
+                        "</html>");
+                resp.getWriter().write(sb.toString());
             }
         }else {
             //会话失效

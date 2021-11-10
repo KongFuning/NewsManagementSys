@@ -47,6 +47,14 @@ public class UserMapper_test {
         System.out.println(mapper.getUserNum());
     }
 
+    @Test
+    public void getAllUserByDepartId_test(){
+        List<User> allUserByDepartId = mapper.getAllUserByDepartId(1);
+        for (User user : allUserByDepartId) {
+            System.out.println(user);
+        }
+    }
+
 
     @After
     public void destroy(){

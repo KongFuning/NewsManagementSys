@@ -10,6 +10,9 @@ public interface UserMapper {
     //查询所有用户
     List<User> getAllUser();
 
+    //根据部门id查询用户
+    List<User> getAllUserByDepartId(int id);
+
     //根据用户名查询用户
     User getUserByName(String username);
 

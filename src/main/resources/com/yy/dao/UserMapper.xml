@@ -34,6 +34,9 @@
         select * from users where id = #{id};
     </select>
 
+    <select id="getAllUserByDepartId" parameterType="int" resultType="User">
+        select * from users where depart_id=#{id};
+    </select>
     <update id="updateUser" parameterType="User">
         update users set user_name=#{user_name},
                         user_password=#{user_password},
