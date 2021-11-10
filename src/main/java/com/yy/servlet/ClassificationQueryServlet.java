@@ -114,7 +114,7 @@ public class ClassificationQueryServlet extends HttpServlet {
                         "<body>\n" +
                         "<table id=\"topic_table\">");
                 for (Department department : allDepartment) {
-                    sb.append("<tr><td colspan=\"2\" style=\"font-weight:bold;text-align: left\" >部门："+
+                    sb.append("<tr><td colspan=\"2\" style=\"font-weight:bold;font-size:30px;text-align: left\" >部门："+
                             department.getName()+"</td></tr>");
                     List<User> allUserByDepartId = userService.getAllUserByDepartId(department.getId());
                     for (User user : allUserByDepartId) {

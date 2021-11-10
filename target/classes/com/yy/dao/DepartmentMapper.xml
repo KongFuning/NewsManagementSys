@@ -8,4 +8,8 @@
     <select id="getDepartName" parameterType="int" resultType="String">
         select name from department where id = #{id};
     </select>
+
+    <select id="getAllDepartment" resultType="Department">
+        select * from department;
+    </select>
 </mapper>
