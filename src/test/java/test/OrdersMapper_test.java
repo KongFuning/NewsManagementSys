@@ -3,6 +3,7 @@ package test;
 import com.yy.dao.OrdersMapper;
 import com.yy.dao.UserMapper;
 import com.yy.pojo.Newspaper;
+import com.yy.pojo.User;
 import com.yy.utils.myBatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.After;
@@ -37,6 +38,27 @@ public class OrdersMapper_test {
         }
     }
 
+    @Test
+    public void getAllNewsId_test(){
+        List<Integer> allNewsId = mapper.getAllNewsId();
+        for (Integer integer : allNewsId) {
+            System.out.println(integer);
+        }
+    }
+
+    @Test
+    public void getAllUsersOrderOneNew_test(){
+        List<User> allUsersOrderOneNew = mapper.getAllUsersOrderOneNew(1);
+        for (User user : allUsersOrderOneNew) {
+            System.out.println(user);
+        }
+    }
+
+    @Test
+    public void getNewspaperByNewsId_test(){
+        Newspaper newspaperByNewsId = mapper.getNewspaperByNewsId(1);
+        System.out.println(newspaperByNewsId);
+    }
     @After
     public void destroy(){
         sqlSession.close();

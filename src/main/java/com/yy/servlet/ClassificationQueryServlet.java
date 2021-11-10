@@ -3,6 +3,7 @@ package com.yy.servlet;
 
 import com.yy.pojo.AdminUser;
 import com.yy.pojo.Newspaper;
+import com.yy.pojo.User;
 import com.yy.services.impl.OrdersServiceImpl;
 import com.yy.services.impl.UserServiceImpl;
 
@@ -69,7 +70,31 @@ public class ClassificationQueryServlet extends HttpServlet {
             }
             //2.按报刊查询
             if(classify == 2){
-
+                //先查出所有订阅了的报刊的id
+                List<Integer> allNewsId = ordersService.getAllNewsId();
+                sb.append("<!DOCTYPE html>\n" +
+                        "<html>\n" +
+                        "<head>\n" +
+                        "\t<meta charset=\"UTF-8\">\n" +
+                        "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"css/admin.css\">\n" +
+                        "\t<title>分类查询——报刊</title>\n" +
+                        "</head>\n" +
+                        "<body>\n" +
+                        "\t<table id=\"topic_table\">\n");
+                for (Integer newsId : allNewsId) {
+                    sb.append("\t\t<tr><td colspan=\"2\" style=\"font-weight:bold;text-align: left\" >报刊："+
+                            ordersService.getNewspaperByNewsId(newsId).getName()+"</td></tr>");
+                    sb.append("\t\t<tr><th>id</th><th>用户名</th>");
+                    List<User> users = ordersService.getAllUsersOrderOneNew(newsId);
+                    for (User user : users) {
+                        sb.append("<tr><td name=\"id\">"+user.getId()+
+                                "</td><td name=\"name\">"+user.getUser_name()+"</td></tr>");
+                    }
+                }
+                sb.append("\t</table>\n" +
+                        "</body>\n" +
+                        "</html>");
+                resp.getWriter().write(sb.toString());
             }
             //3.按部门查询
             if(classify == 3){

@@ -12,4 +12,17 @@
     <select id="getAllUsers" resultType="int">
         select distinct user_id from orders order by user_id;
     </select>
+
+    <select id="getAllNewsId" resultType="int">
+        select distinct news_id from orders;
+    </select>
+
+    <select id="getAllUsersOrderOneNew" parameterType="int" resultType="User">
+        select U.* from orders O,users U where news_id=#{id} and O.user_id=U.id;
+    </select>
+
+    <select id="getNewspaperByNewsId" parameterType="int" resultType="Newspaper">
+        select * from newspaper where id=#{id};
+    </select>
+
 </mapper>
