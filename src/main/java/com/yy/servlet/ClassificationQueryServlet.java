@@ -49,8 +49,7 @@ public class ClassificationQueryServlet extends HttpServlet {
                         "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"css/admin.css\">\n" +
                         "\t<title>分类查询——人员</title>\n" +
                         "</head>\n" +
-                        "<body onload=\"iniEvent()\">\n" +
-                        "<form action=\"#\" method=\"post\" name=\"myForm\">\n" +
+                        "<body>\n" +
                         "\t<table id=\"topic_table\">");
                 for (Integer userId : users) {
                     List<Newspaper> newspaperByUserId = ordersService.getNewspaperByUserId(userId);
@@ -63,7 +62,6 @@ public class ClassificationQueryServlet extends HttpServlet {
                     }
                 }
                 sb.append("</table>\n" +
-                        "</form>\n" +
                         "</body>\n" +
                         "</html>");
                 resp.getWriter().write(sb.toString());

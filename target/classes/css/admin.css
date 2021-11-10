@@ -37,6 +37,7 @@ td{
 }
 #topic_table tr{
 	height: 40px;
+	border-bottom:1px #c7b4b4 solid;
 }
 #topic_table td{
 	text-align: center;
