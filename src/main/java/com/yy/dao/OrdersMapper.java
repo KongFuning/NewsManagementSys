@@ -4,6 +4,7 @@ import com.yy.pojo.Newspaper;
 import com.yy.pojo.User;
 
 import java.util.List;
+import java.util.Map;
 
 public interface OrdersMapper {
 
@@ -22,4 +23,9 @@ public interface OrdersMapper {
     //根据报刊id获取报刊
     Newspaper getNewspaperByNewsId(int id);
 
+    //查询某个用户是否订阅了某本书
+    Integer checkOrder(Map map);
+
+    //某用户根据报刊id订阅报刊
+    Integer orderNew(Map map);
 }

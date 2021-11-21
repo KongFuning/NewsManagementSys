@@ -1,7 +1,6 @@
 package com.yy.servlet;
 
 import com.yy.pojo.User;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -59,14 +58,14 @@ public class UserMainServlet extends HttpServlet {
                     "                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->\n" +
                     "                <ul class=\"layui-nav layui-nav-tree\" lay-filter=\"kitNavbar\" kit-navbar>\n" +
                     "                    <li class=\"layui-nav-item\">\n" +
-                    "                        <a href=\"/userSubscribeNewsServlet\" data-url=\"#\" data-name=\"table\" kit-loader><i class=\"fa fa-plug\" aria-hidden=\"true\"></i><span> 订阅报刊</span></a>\n" +
+                    "                        <a href=\"/userSubscribeNewsServlet\" data-url=\"/userSubscribeNewsServlet\" data-name=\"form\" kit-loader><i class=\"fa fa-plug\" aria-hidden=\"true\"></i><span> 订阅报刊</span></a>\n" +
                     "                    </li>\n" +
                     "                    <li class=\"layui-nav-item\">\n" +
                     "                        <a href=\"javascript:;\" data-url=\"/userSeachOrderServlet\" data-name=\"form\" kit-loader><i class=\"fa fa-plug\" aria-hidden=\"true\"></i><span> 查询订阅</span></a>\n" +
                     "                    </li>\n" +
-                    "                    <li class=\"layui-nav-item\">\n" +
-                    "                        <a href=\"javascript:;\" data-url=\"#\" data-name=\"form\" kit-loader><i class=\"fa fa-plug\" aria-hidden=\"true\"></i><span> 统计</span></a>\n" +
-                    "                    </li>\n" +
+//                    "                    <li class=\"layui-nav-item\">\n" +
+//                    "                        <a href=\"javascript:;\" data-url=\"#\" data-name=\"form\" kit-loader><i class=\"fa fa-plug\" aria-hidden=\"true\"></i><span> 统计</span></a>\n" +
+//                    "                    </li>\n" +
                     "                </ul>\n" +
                     "            </div>\n" +
                     "        </div>\n" +

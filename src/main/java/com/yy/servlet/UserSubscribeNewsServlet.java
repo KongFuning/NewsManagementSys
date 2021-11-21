@@ -45,20 +45,20 @@ public class UserSubscribeNewsServlet extends HttpServlet {
                     "\t<title>订阅报刊</title>\n" +
                     "</head>\n" +
                     "<body onload=\"iniEvent()\">\n" +
-                    "<form action=\"#\" method=\"post\" name=\"myForm\">\n" +
+                    "<form action=\"/userConfirmSubscribeNewsServlet\" method=\"post\" name=\"myForm\">\n" +
                     "\t<table id=\"topic_table\">\n" +
                     "\t\t<tr><th>报刊代号</th><th>报刊名</th><th>季度报价</th><th>订阅</th>");
             for (Newspaper newspaper : newspapers) {
                 sb.append("<tr><td name=\"id\">"+newspaper.getId()+
                         "</td><td name=\"name\">"+newspaper.getName()+
                         "</td><td name=\"price\">"+newspaper.getOffer()+
-                        "</td><td><input type=\"checkbox\" name=\"one\"  value=\"1\"><input type=\"hidden\" name=\"hidden\" value=\"1\"></td>");
+                        "</td><td><input type=\"checkbox\" name=\"one\"  value=\""+newspaper.getOffer()+"\"><input type=\"hidden\" name=\"hidden\" value=\""+newspaper.getId()+"\"></td>");
             }
-            sb.append("</table>\n" +
-                    "\t<input name=\"addNews\" type=\"button\" value=\"订阅\">\n" +
+            sb.append("<tr><td>合计:</td><td colspan=\"2\"><input id=\"ids\" name=\"ids\" type=\"text\"></td><td><p><span id=\"sumMoney\"></span></p></td>");
+            sb.append("\t</table>\n" +
+                    "\t<input name=\"addNews\" type=\"submit\" value=\"订阅\">\n" +
                     "</form>\n" +
                     "</body>\n" +
-                    "</html>\n" +
                     "<script type=\"text/javascript\" src=\"js/jquery-1.4.2.min.js\"></script>\n" +
                     "<script>\n" +
                     "\tfunction calculateNewsId() {\n" +
@@ -68,6 +68,7 @@ public class UserSubscribeNewsServlet extends HttpServlet {
                     "\t\tfor (var i = 0; i < chkItems.length; i++) {\n" +
                     "\t\t\tif (chkItems[i].checked) {\n" +
                     "\t\t\t\tids.push(idItems[i].value);\n" +
+                    "\t\t\t\tdocument.getElementById(\"ids\").value = ids;\n" +
                     "\t\t\t}\n" +
                     "\t\t}\n" +
                     "\t\tconsole.log(ids);\n" +
@@ -78,7 +79,9 @@ public class UserSubscribeNewsServlet extends HttpServlet {
                     "\t\t\tchkItems[i].onclick = calculateNewsId;\n" +
                     "\t\t}\n" +
                     "\t}\n" +
-                    "</script>" );
+                    "</script>\n" +
+                    "</html>");
+
             PrintWriter out = resp.getWriter();
             out.write(sb.toString());
 

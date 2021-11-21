@@ -10,7 +10,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class OrdersMapper_test {
     private SqlSession sqlSession;
@@ -59,6 +61,24 @@ public class OrdersMapper_test {
         Newspaper newspaperByNewsId = mapper.getNewspaperByNewsId(1);
         System.out.println(newspaperByNewsId);
     }
+
+    @Test
+    public void checkOrder_test(){
+        Map map = new HashMap();
+        map.put("user_id",9);
+        map.put("news_id",1);
+        System.out.println(mapper.checkOrder(map));;
+    }
+
+    @Test
+    public void orderNew_test(){
+        Map map = new HashMap();
+        map.put("user_id",9);
+        map.put("news_id",1);
+        System.out.println(mapper.orderNew(map));
+    }
+
+
     @After
     public void destroy(){
         sqlSession.close();

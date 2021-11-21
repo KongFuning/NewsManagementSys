@@ -25,4 +25,11 @@
         select * from newspaper where id=#{id};
     </select>
 
+    <select id="checkOrder" parameterType="map" resultType="int">
+        select id from orders where user_id=#{user_id} and news_id = #{news_id};
+    </select>
+
+    <insert id="orderNew" parameterType="map">
+        insert into orders (user_id,news_id) values(#{user_id},#{news_id});
+    </insert>
 </mapper>

@@ -91,5 +91,11 @@ td{
 	padding-left: 20px;
 	margin-left: 20px;
 }
-
+#ids{
+	border: hidden;
+	background-color: white;
+	font-size: 20px;
+	vertical-align:bottom;
+	margin-top: 15px;
+}
 

@@ -7,8 +7,8 @@ import com.yy.services.OrdersServiceMapper;
 import com.yy.utils.myBatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-
 import java.util.List;
+import java.util.Map;
 
 public class OrdersServiceImpl implements OrdersServiceMapper {
     private SqlSessionFactory sqlSessionFactory = myBatisUtils.getSqlSessionFactory();
@@ -39,5 +39,15 @@ public class OrdersServiceImpl implements OrdersServiceMapper {
     @Override
     public Newspaper getNewspaperByNewsId(int id) {
         return getSqlSession().getMapper(OrdersMapper.class).getNewspaperByNewsId(id);
+    }
+
+    @Override
+    public Integer checkOrder(Map map) {
+        return getSqlSession().getMapper(OrdersMapper.class).checkOrder(map);
+    }
+
+    @Override
+    public Integer orderNew(Map map) {
+        return getSqlSession().getMapper(OrdersMapper.class).orderNew(map);
     }
 }
