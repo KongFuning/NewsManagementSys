@@ -1,0 +1,101 @@
+@font-face {
+	font-family:'myFont';
+	src: url('../font/myFont.TTF');
+	font-weight: 700;
+	font-style: normal;
+}
+#sumMoney{
+	font-weight:bold;
+}
+.tittle-name{
+	float: left;
+	position: absolute;
+	font-weight: 700;
+	font-family: myFont;
+	font-size: 30px;
+	left: 20px;
+	top: 20px;
+}
+#topic_table{
+	margin: 0 auto;
+	width: 100%;
+	/* 列宽由表格宽度和列宽度设定 */
+	table-layout:fixed;
+}
+
+tr{
+	border-bottom:1px #c7b4b4 solid;
+}
+td{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#topic_table th{
+	background-color: #d4cbcb;
+}
+#topic_table tr{
+	height: 40px;
+	border-bottom:1px #c7b4b4 solid;
+}
+#topic_table td{
+	text-align: center;
+}
+#topic_bottom{
+	text-align: center;
+	height: 50px;
+	margin: auto;
+	line-height: 50px;
+	margin-top: 50px;
+}
+#addUser{
+	background-color: #009688;
+	border-color: #009688 ;
+	width: 80px;
+	height: 35px;
+	color: white;
+	font-size: 12px;
+	margin: auto;
+	margin-top: 15px;
+	margin-left: 15px;
+	text-align: center;
+}
+#addNews{
+	background-color: #009688;
+	border-color: #009688 ;
+	width: 80px;
+	height: 35px;
+	color: white;
+	font-size: 12px;
+	margin: auto;
+	margin-top: 15px;
+	margin-left: 20px;
+	text-align: center;
+}
+#depart{
+	background: transparent;
+	border-radius: 10px;
+	width: 180px;
+	height: 40px;
+	-webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+	box-shadow:inset 0px 1px 1px rgba(0,0,0,0.075), 0px 0px 8px rgba(102,175,233,0.6);
+	padding-left: 10px;
+}
+#classify{
+	background-color: white;
+	border-color: white;
+	border-radius: 10px;
+	width: 100px;
+	height: 40px;
+	padding-left: 20px;
+	margin-left: 20px;
+}
+#ids{
+	border: hidden;
+	background-color: white;
+	font-size: 20px;
+	vertical-align:bottom;
+	margin-top: 15px;
+}
+

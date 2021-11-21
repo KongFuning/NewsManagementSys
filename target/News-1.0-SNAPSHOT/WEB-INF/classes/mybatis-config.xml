@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <!--引入mysql的外部配置文件-->
+    <properties resource="mysql-config.properties"></properties>
+
+    <!--给pojo包下的所有实体类起别名-->
+    <typeAliases>
+        <package name="com.yy.pojo"/>
+    </typeAliases>
+
+    <!--配置mysql环境-->
+    <environments default="mysql">
+        <environment id="mysql">
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--映射mapper-->
+    <mappers>
+        <mapper resource="com/yy/dao/UserMapper.xml"></mapper>
+        <mapper resource="com/yy/dao/OrdersMapper.xml"></mapper>
+        <mapper resource="com/yy/dao/NewspaperMapper.xml"></mapper>
+        <mapper resource="com/yy/dao/NewspaperClassMapper.xml"></mapper>
+        <mapper resource="com/yy/dao/DepartmentMapper.xml"></mapper>
+        <mapper resource="com/yy/dao/AdminUserMapper.xml"></mapper>
+    </mappers>
+</configuration>

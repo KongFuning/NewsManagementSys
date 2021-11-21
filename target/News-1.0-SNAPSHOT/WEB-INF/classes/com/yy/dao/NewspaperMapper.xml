@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yy.dao.NewspaperMapper">
+
+    <select id="getAllNewspaper" resultType="Newspaper">
+        select * from newspaper;
+    </select>
+
+    <insert id="addNews" parameterType="Newspaper">
+        insert into newspaper (id,name,publisher,cycle,offer,content,classify_id)
+        values(#{id},#{name},#{publisher},#{cycle},#{offer},#{content},#{classify_id});
+    </insert>
+</mapper>

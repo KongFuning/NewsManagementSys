@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--管理员分类查询-->
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="shortcut icon" href="favicon.ico" >
+		<link rel="stylesheet" href="css/base.css"/>
+		<link rel="stylesheet" href="css/admin.css"/>
+		<title>分类查询</title>
+	</head>
+	<body>
+			<form id="loginForm" action="/classificationQueryServlet" method="post">
+				<table id="loginTable">
+					<tr style="border-bottom: none">
+						<td></td>
+						<td>
+							<select id="classify" name="classify">
+								<option value="1">人员</option>
+								<option value="2">报刊</option>
+								<option value="3">部门</option>
+							</select>
+						</td>
+						<td></td>
+					</tr>
+					<tr style="border-bottom: none">
+						<td></td>
+						<td>
+							<input id="addNews" name="addNews" type="submit" value="查询">
+						</td>
+						<td></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</body>
+</html>

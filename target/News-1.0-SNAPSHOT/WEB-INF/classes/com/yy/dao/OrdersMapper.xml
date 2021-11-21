@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yy.dao.OrdersMapper">
+
+    <select id="getNewspaperByUserId" parameterType="int" resultType="Newspaper">
+        select N.* from orders as O,newspaper as N where user_id=#{user_id} and news_id=N.id order by N.id;
+    </select>
+
+    <select id="getAllUsers" resultType="int">
+        select distinct user_id from orders order by user_id;
+    </select>
+
+    <select id="getAllNewsId" resultType="int">
+        select distinct news_id from orders;
+    </select>
+
+    <select id="getAllUsersOrderOneNew" parameterType="int" resultType="User">
+        select U.* from orders O,users U where news_id=#{id} and O.user_id=U.id;
+    </select>
+
+    <select id="getNewspaperByNewsId" parameterType="int" resultType="Newspaper">
+        select * from newspaper where id=#{id};
+    </select>
+
+    <select id="checkOrder" parameterType="map" resultType="int">
+        select id from orders where user_id=#{user_id} and news_id = #{news_id};
+    </select>
+
+    <insert id="orderNew" parameterType="map">
+        insert into orders (user_id,news_id) values(#{user_id},#{news_id});
+    </insert>
+</mapper>
