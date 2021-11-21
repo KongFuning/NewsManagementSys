@@ -1,4 +1,4 @@
-package com.yy.servlet;
+package com.yy.servlet.User;
 
 import com.yy.pojo.Newspaper;
 import com.yy.pojo.User;
@@ -55,7 +55,7 @@ public class UserSubscribeNewsServlet extends HttpServlet {
             }
             sb.append("<tr><td>合计:</td><td colspan=\"2\"><input id=\"ids\" name=\"ids\" type=\"text\"></td><td><p><span id=\"sumMoney\"></span></p></td>");
             sb.append("\t</table>\n" +
-                    "\t<input name=\"addNews\" type=\"submit\" value=\"订阅\">\n" +
+                    "\t<input name=\"addNews\" id=\"addNews\" type=\"submit\" value=\"订阅\">\n" +
                     "</form>\n" +
                     "</body>\n" +
                     "<script type=\"text/javascript\" src=\"js/jquery-1.4.2.min.js\"></script>\n" +

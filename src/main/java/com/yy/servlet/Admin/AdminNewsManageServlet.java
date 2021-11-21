@@ -1,9 +1,8 @@
-package com.yy.servlet;
+package com.yy.servlet.Admin;
 
 import com.yy.pojo.AdminUser;
-import com.yy.pojo.User;
-import com.yy.services.impl.UserServiceImpl;
-
+import com.yy.pojo.Newspaper;
+import com.yy.services.impl.NewspaperServiceImpl;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,10 +12,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-//管理员用户管理模块
-@WebServlet("/adminUserManageServlet")
-public class AdminUserManageServlet extends HttpServlet {
-    private UserServiceImpl userService = new UserServiceImpl();
+//管理员报刊管理模块
+@WebServlet("/adminNewsManageServlet")
+public class AdminNewsManageServlet extends HttpServlet {
+    NewspaperServiceImpl newspaperService = new NewspaperServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req,resp);
@@ -31,8 +30,8 @@ public class AdminUserManageServlet extends HttpServlet {
         HttpSession session = req.getSession();
         AdminUser adminUser = (AdminUser)session.getAttribute("adminUser");
 
-        //获取用户集合
-        List<User> allUser = userService.getAllUser();
+        //获取报刊集合
+        List<Newspaper> newspapers = newspaperService.getAllNewspaper();
         StringBuilder sb = new StringBuilder(); // 生成主要页面
         //如果adminUser不为空，则表示会话生效
         if(adminUser != null){
@@ -41,22 +40,24 @@ public class AdminUserManageServlet extends HttpServlet {
                     "\t<head>\n" +
                     "\t\t<meta charset=\"UTF-8\">\n" +
                     "\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"css/admin.css\">\n" +
-                    "\t\t<title>新用户录入</title>\n" +
+                    "\t\t<title>新报刊录入</title>\n" +
                     "\t</head>\n" +
                     "\t<body>\n" +
                     "\t\t\n" +
                     "\t<table id=\"topic_table\">\n" +
-                    "\t\t<tr><th>id</th><th>用户名</th><th>密码</th><th>真实姓名</th><th>身份证号码</th><th>手机号码</th><th>住址</th><th>部门</th><th>操作</th></tr>");
-            for (User user : allUser) {
-                sb.append("<tr><td>"+user.getId()+"</td><td>"+user.getUser_name()+
-                        "</td><td>"+user.getUser_password()+"</td><td>"+user.getUser_realname()+
-                        "</td><td>"+user.getUser_cardid()+"</td><td>"+user.getUser_phone()+
-                        "</td><td>"+user.getUser_address()+
-                        "</td><td>1</td><td><a href=\"javascript:\">修改</a>/<a href=\"javascript:\">删除</a></td></tr>");
+                    "\t\t<tr><th>报刊代号</th><th>报刊名</th><th>出版社</th><th>出版周期</th><th>季度报价</th><th>内容介绍</th><th>分类编号</th><th>操作</th></tr>");
+            for (Newspaper newspaper : newspapers) {
+                sb.append("<tr><td>"+newspaper.getId()+"</td><td>"+newspaper.getName()+
+                        "</td><td>"+newspaper.getPublisher()+
+                        "</td><td>"+newspaper.getCycle()+
+                        "</td><td>"+newspaper.getOffer()+"</td><td>"+newspaper.getContent()+
+                        "</td><td>"+newspaper.getClassify_id()+
+                        "</td><td><a href=\"javascript:\" style=\"color: green; font-weight: bold;\">查看</a>/<a href=\"javascript:\" style=\"color: red; font-weight: bold;\">删除</a></td></tr>");
             }
-            sb.append("</table>\n" +
-                    "\t<a href=\"Admin_addUser.html\"><input id=\"addUser\" name=\"addUser\" type=\"button\" value=\"添加用户\"></a>\n" +
-                    "\t</body>");
+            sb.append("\t</table>\n" +
+                    "\t<a href=\"Admin_addNews.html\"><input id=\"addNews\" name=\"addNews\" type=\"button\" value=\"添加新报刊\"></a>\n" +
+                    "\t</body>\n" +
+                    "</html>");
             resp.getWriter().write(sb.toString());
         }else {
             //会话失效

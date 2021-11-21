@@ -1,4 +1,4 @@
-package com.yy.servlet;
+package com.yy.servlet.Admin;
 
 import com.yy.pojo.AdminUser;
 import javax.servlet.ServletException;

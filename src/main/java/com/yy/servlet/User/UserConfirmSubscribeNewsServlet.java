@@ -1,4 +1,4 @@
-package com.yy.servlet;
+package com.yy.servlet.User;
 
 import com.yy.pojo.User;
 import com.yy.services.impl.OrdersServiceImpl;

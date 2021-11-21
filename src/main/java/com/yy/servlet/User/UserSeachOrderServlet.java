@@ -1,4 +1,4 @@
-package com.yy.servlet;
+package com.yy.servlet.User;
 
 import com.yy.pojo.Newspaper;
 import com.yy.pojo.User;
@@ -48,7 +48,11 @@ public class UserSeachOrderServlet extends HttpServlet {
                     "\t<table id=\"topic_table\">\n" +
                     "\t\t<tr><th>报刊代号</th><th>报刊名</th><th>出版社</th><th>出版周期</th><th>季度报价</th><th>内容介绍</th><th>分类编号</th><th>操作</th></tr>");
             for (Newspaper newspaper : newspaperByUserId) {
-                sb.append("<tr><td>"+newspaper.getId()+"</td><td>"+newspaper.getName()+"</td><td>"+newspaper.getPublisher()+"</td><td>"+newspaper.getCycle()+"</td><td>"+newspaper.getOffer()+"</td><td>"+newspaper.getContent()+"</td><td>"+newspaper.getClassify_id()+"</td><td><a href=\"javascript:\">修改</a>/<a href=\"javascript:\">删除</a></td></tr>");
+                sb.append("<tr><td>"+newspaper.getId()+"</td><td>"+newspaper.getName()+"</td><td>"+
+                        newspaper.getPublisher()+"</td><td>"+newspaper.getCycle()+
+                        "</td><td>"+newspaper.getOffer()+"</td><td>"+newspaper.getContent()+
+                        "</td><td>"+newspaper.getClassify_id()+
+                        "</td><td><a href=\"javascript:\" style=\"color: green; font-weight: bold;\">查看</a>/<a href=\"javascript:\" style=\"color: red; font-weight: bold;\">取消订阅</a></td></tr>");
             }
             sb.append("</table>\n" +
                     "\t</body>\n" +
