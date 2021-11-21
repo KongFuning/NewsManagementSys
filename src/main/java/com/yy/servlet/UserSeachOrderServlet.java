@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+//普通用户查询订阅模块
 @WebServlet("/userSeachOrderServlet")
 public class UserSeachOrderServlet extends HttpServlet {
     OrdersServiceImpl ordersService = new OrdersServiceImpl();

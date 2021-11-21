@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+//管理员分类查询模块
 @WebServlet("/classificationQueryServlet")
 public class ClassificationQueryServlet extends HttpServlet {
     OrdersServiceImpl ordersService = new OrdersServiceImpl();

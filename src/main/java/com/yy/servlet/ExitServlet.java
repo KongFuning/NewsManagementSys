@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+//注销登录模块
 @WebServlet("/exitServlet")
 public class ExitServlet extends HttpServlet {
     @Override

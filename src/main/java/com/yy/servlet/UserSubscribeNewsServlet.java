@@ -1,10 +1,8 @@
 package com.yy.servlet;
 
-import com.yy.pojo.AdminUser;
 import com.yy.pojo.Newspaper;
 import com.yy.pojo.User;
 import com.yy.services.impl.NewspaperServiceImpl;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+//普通用户订阅报刊模块
 @WebServlet("/userSubscribeNewsServlet")
 public class UserSubscribeNewsServlet extends HttpServlet {
     NewspaperServiceImpl newspaperService = new NewspaperServiceImpl();

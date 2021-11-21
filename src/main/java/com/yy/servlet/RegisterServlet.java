@@ -1,6 +1,5 @@
 package com.yy.servlet;
 
-
 import com.yy.pojo.User;
 import com.yy.services.impl.UserServiceImpl;
 import javax.servlet.ServletException;
@@ -10,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+//注册模块
 @WebServlet("/registerServlet")
 public class RegisterServlet extends HttpServlet {
     private UserServiceImpl userService = new UserServiceImpl();

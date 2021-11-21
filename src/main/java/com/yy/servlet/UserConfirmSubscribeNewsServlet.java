@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+//普通用户确认订阅报刊模块
 @WebServlet("/userConfirmSubscribeNewsServlet")
 public class UserConfirmSubscribeNewsServlet extends HttpServlet {
     OrdersServiceImpl ordersService = new OrdersServiceImpl();

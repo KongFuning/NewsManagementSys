@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+//管理员登录后的首页
 @WebServlet("/adminMainServlet")
 public class AdminMainServlet extends HttpServlet {
     @Override

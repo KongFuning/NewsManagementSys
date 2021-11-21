@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+//管理员用户管理模块
 @WebServlet("/adminUserManageServlet")
 public class AdminUserManageServlet extends HttpServlet {
     private UserServiceImpl userService = new UserServiceImpl();

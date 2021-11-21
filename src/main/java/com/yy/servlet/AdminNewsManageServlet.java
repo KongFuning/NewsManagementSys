@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+//管理员报刊管理模块
 @WebServlet("/adminNewsManageServlet")
 public class AdminNewsManageServlet extends HttpServlet {
     NewspaperServiceImpl newspaperService = new NewspaperServiceImpl();

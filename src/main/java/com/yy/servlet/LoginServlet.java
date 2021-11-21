@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+//登录模块
 @WebServlet("/loginServlet")
 public class LoginServlet extends HttpServlet {
     private UserServiceImpl userService = new UserServiceImpl();
@@ -46,9 +47,6 @@ public class LoginServlet extends HttpServlet {
                 map.put("userName",userName);
                 map.put("passWord",passWord);
                 User user1 = new User();
-//                user1.setId(userService.getUserByName(userName).getId());
-//                user1.setUser_name(userName);
-//                user1.setUser_password(passWord);
                 user1 = userService.getUserByName(userName);
                 Integer result = userService.checkUser(map);
                 if(result != null){

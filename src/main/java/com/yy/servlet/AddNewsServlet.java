@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+//管理员添加新报刊
 @WebServlet("/addNewsServlet")
 public class AddNewsServlet extends HttpServlet {
     private NewspaperServiceImpl newspaperService = new NewspaperServiceImpl();

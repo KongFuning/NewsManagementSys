@@ -13,38 +13,39 @@
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
-    <packaging>jar</packaging>
-    <dependencies>
+    <!--打包方式 war -->
+    <packaging>war</packaging>
 
-        <!--mysql-->
+    <dependencies>
+        <!--mysql数据库依赖-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.11</version>
         </dependency>
 
-        <!--mybatis-->
+        <!--mybatis持久层框架依赖-->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
             <version>3.4.5</version>
         </dependency>
 
-        <!--junit-->
+        <!--junit单元测试-->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
         </dependency>
 
-        <!--lombok-->
+        <!--lombok工具-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.4</version>
         </dependency>
 
-        <!--slf4j-->
+        <!--slf4j日志-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
@@ -58,17 +59,6 @@
             <version>3.1.0</version>
             <scope>provided</scope>
         </dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>compile</scope>
-        </dependency>
     </dependencies>
-
-    <build>
-
-    </build>
 
 </project>

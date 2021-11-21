@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+//普通用户登录后首页模块
 @WebServlet("/userMainServlet")
 public class UserMainServlet extends HttpServlet {
     @Override
@@ -63,9 +64,6 @@ public class UserMainServlet extends HttpServlet {
                     "                    <li class=\"layui-nav-item\">\n" +
                     "                        <a href=\"javascript:;\" data-url=\"/userSeachOrderServlet\" data-name=\"form\" kit-loader><i class=\"fa fa-plug\" aria-hidden=\"true\"></i><span> 查询订阅</span></a>\n" +
                     "                    </li>\n" +
-//                    "                    <li class=\"layui-nav-item\">\n" +
-//                    "                        <a href=\"javascript:;\" data-url=\"#\" data-name=\"form\" kit-loader><i class=\"fa fa-plug\" aria-hidden=\"true\"></i><span> 统计</span></a>\n" +
-//                    "                    </li>\n" +
                     "                </ul>\n" +
                     "            </div>\n" +
                     "        </div>\n" +

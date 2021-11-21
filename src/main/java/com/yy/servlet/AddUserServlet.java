@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+//管理员添加新用户
 @WebServlet("/addUserServlet")
 public class AddUserServlet extends HttpServlet {
     private UserServiceImpl userService = new UserServiceImpl();

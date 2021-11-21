@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+//普通用户确认修改个人信息模块
 @WebServlet("/confirmUpdateUserInfoServlet")
 public class ConfirmUpdateUserInfoServlet extends HttpServlet {
 
