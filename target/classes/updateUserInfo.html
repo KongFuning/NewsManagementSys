@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!--普通用户修改个人信息-->
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="shortcut icon" href="favicon.ico" >
+		<link rel="stylesheet" href="css/main.css"/>
+		<title>个人信息</title>
+	</head>
+	<body>
+		<div class="tittle-name">个人信息 </div>
+		<div class="loginOut">
+			<form id="loginForm" action="#" method="post" onsubmit="ret()">
+				<table id="loginTable">
+					<tr>
+						<td>用户名： </td>
+						<td><input id="userName" name="userName" type="text" class="input" value=""></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>密&nbsp;&nbsp;&nbsp;&nbsp;码： </td>
+						<td><input id="passWord" name="passWord" type="password" class="input" value=""></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>真实姓名： </td>
+						<td><input id="realName" name="realName" type="text" class="input" value=""></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>身份证号码： </td>
+						<td><input id="cardId" name="cardId" type="text" class="input" value=""></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>手机号码： </td>
+						<td><input id="phone" name="phone" type="text" class="input" value=""></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>地址： </td>
+						<td><input id="address" name="address" type="text" class="input" value=""></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>部门： </td>
+						<td>
+							<select id="userOrAdmin" name="userOrAdmin">
+								<option value="none" selected disabled hidden>请选择选项</option>
+								<option value="1">A部门</option>
+								<option value="2">B部门</option>
+								<option value="3">C部门</option>
+							</select>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<a><input id="registerBtn" name="registerBtn" type="submit" value="修 改" class="btn"></a>
+						</td>
+						<td></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</body>
+	<script>
+	function ret(){
+		if(confirm("确认修改吗？")) {
+			return true;
+		};
+		return false;
+	}
+	</script>
+</html>

@@ -14,7 +14,7 @@
     </properties>
 
     <!--打包方式 war -->
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <dependencies>
         <!--mysql数据库依赖-->
