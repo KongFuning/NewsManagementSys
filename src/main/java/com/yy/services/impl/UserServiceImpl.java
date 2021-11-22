@@ -61,4 +61,9 @@ public class UserServiceImpl implements UserServiceMapper {
     public List<User> getAllUserByDepartId(int id) {
         return getSqlSession().getMapper(UserMapper.class).getAllUserByDepartId(id);
     }
+
+    @Override
+    public Integer deleteUserById(int id) {
+        return getSqlSession().getMapper(UserMapper.class).deleteUserById(id);
+    }
 }

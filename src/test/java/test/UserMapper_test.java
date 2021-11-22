@@ -55,6 +55,10 @@ public class UserMapper_test {
         }
     }
 
+    @Test
+    public void deleteUserById_test(){
+        System.out.println(mapper.deleteUserById(5));;
+    }
 
     @After
     public void destroy(){

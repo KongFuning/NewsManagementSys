@@ -34,4 +34,7 @@ public interface UserMapper {
     //更新用户信息
     Integer updateUser(User user);
 
+    //根据id删除用户
+    Integer deleteUserById(int id);
+
 }

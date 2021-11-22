@@ -46,4 +46,8 @@
                         user_address=#{user_address},
                         depart_id=#{depart_id} where id=#{id};
     </update>
+
+    <delete id="deleteUserById" parameterType="int">
+        delete from users where id = #{id};
+    </delete>
 </mapper>

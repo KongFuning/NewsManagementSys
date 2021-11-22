@@ -33,4 +33,7 @@ public interface UserServiceMapper {
 
     //根据部门id查询用户
     List<User> getAllUserByDepartId(int id);
+
+    //根据id删除用户
+    Integer deleteUserById(int id);
 }

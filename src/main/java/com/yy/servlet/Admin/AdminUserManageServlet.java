@@ -52,7 +52,7 @@ public class AdminUserManageServlet extends HttpServlet {
                         "</td><td>"+user.getUser_password()+"</td><td>"+user.getUser_realname()+
                         "</td><td>"+user.getUser_cardid()+"</td><td>"+user.getUser_phone()+
                         "</td><td>"+user.getUser_address()+
-                        "</td><td>1</td><td><a href=\"javascript:\" style=\"color: red; font-weight: bold;\">删除</a></td></tr>");
+                        "</td><td>1</td><td><a href=\"/confirmDeleteUserServlet?id="+user.getId()+"\" style=\"color: red; font-weight: bold;\">删除</a></td></tr>");
             }
             sb.append("</table>\n" +
                     "\t<a href=\"Admin_addUser.html\"><input id=\"addUser\" name=\"addUser\" type=\"button\" value=\"添加用户\"></a>\n" +
