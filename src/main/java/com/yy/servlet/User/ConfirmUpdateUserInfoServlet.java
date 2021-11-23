@@ -67,5 +67,7 @@ public class ConfirmUpdateUserInfoServlet extends HttpServlet {
                     "location.href='/updateUserInfoServlet'</script>");
         }
 
+        //释放SqlSession
+        userService.getSqlSession().close();
     }
 }

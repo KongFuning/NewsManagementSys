@@ -114,5 +114,8 @@ public class UpdateUserInfoServlet extends HttpServlet {
             resp.sendRedirect("index.html");
         }
 
+        //释放SqlSession
+        departmentService.getSqlSession().close();
+
     }
 }

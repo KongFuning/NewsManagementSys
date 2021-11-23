@@ -139,5 +139,10 @@ public class ClassificationQueryServlet extends HttpServlet {
             //会话失效
             resp.sendRedirect("index.html");
         }
+
+        //释放SqlSession
+        ordersService.getSqlSession().close();
+        userService.getSqlSession().close();
+        departmentService.getSqlSession().close();
     }
 }

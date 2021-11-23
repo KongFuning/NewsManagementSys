@@ -88,5 +88,8 @@ public class UserSubscribeNewsServlet extends HttpServlet {
             //会话失效
             resp.sendRedirect("index.html");
         }
+
+        //释放SqlSession
+        newspaperService.getSqlSession().close();
     }
 }

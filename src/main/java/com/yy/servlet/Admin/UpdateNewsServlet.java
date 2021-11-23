@@ -55,5 +55,8 @@ public class UpdateNewsServlet extends HttpServlet {
             resp.sendRedirect("index.html");
         }
 
+        //释放SqlSession
+        newspaperService.getSqlSession().close();
+
     }
 }

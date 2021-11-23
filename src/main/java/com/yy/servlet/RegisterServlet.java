@@ -45,7 +45,7 @@ public class RegisterServlet extends HttpServlet {
             //定时跳转
             resp.setHeader("Refresh", "3;URL=index.html");
         }
-        //释放连接
+        //释放SqlSession资源
         userService.getSqlSession().close();
     }
 }

@@ -48,5 +48,7 @@ public class DeleteUserServlet extends HttpServlet {
             resp.sendRedirect("index.html");
         }
 
+        //释放SqlSession
+        userService.getSqlSession().close();
     }
 }

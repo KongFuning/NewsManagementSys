@@ -91,5 +91,9 @@ public class LoginServlet extends HttpServlet {
                 }
             }
         }
+
+        //释放SqlSession资源
+        userService.getSqlSession().close();
+        adminUserService.getSqlSession().close();
     }
 }

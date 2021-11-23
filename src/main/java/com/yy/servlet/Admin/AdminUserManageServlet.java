@@ -62,5 +62,8 @@ public class AdminUserManageServlet extends HttpServlet {
             //会话失效
             resp.sendRedirect("index.html");
         }
+
+        //释放SqlSession
+        userService.getSqlSession().close();
     }
 }

@@ -45,5 +45,8 @@ public class AddNewsServlet extends HttpServlet {
         newspaperService.addNews(newspaper);
         resp.getWriter().print("<script language=\"javascript\">alert(\"添加成功！\");" +
                 "location.href='AdminMain.jsp'</script>");
+
+        //释放SqlSession
+        newspaperService.getSqlSession().close();
     }
 }

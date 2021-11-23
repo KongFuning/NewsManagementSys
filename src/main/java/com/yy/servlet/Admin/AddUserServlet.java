@@ -61,5 +61,8 @@ public class AddUserServlet extends HttpServlet {
                     "location.href='AdminMain.jsp'</script>");
         }
 
+        //释放SqlSession
+        userService.getSqlSession().close();
+
     }
 }
