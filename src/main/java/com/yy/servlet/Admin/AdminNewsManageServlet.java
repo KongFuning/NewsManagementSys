@@ -52,7 +52,7 @@ public class AdminNewsManageServlet extends HttpServlet {
                         "</td><td>"+newspaper.getCycle()+
                         "</td><td>"+newspaper.getOffer()+"</td><td>"+newspaper.getContent()+
                         "</td><td>"+newspaper.getClassify_id()+
-                        "</td><td><a href=\"javascript:\" style=\"color: green; font-weight: bold;\">查看</a>/<a href=\"javascript:\" style=\"color: red; font-weight: bold;\">删除</a></td></tr>");
+                        "</td><td><a href=\"/seeNewsServlet?id="+newspaper.getId()+"\" style=\"color: green; font-weight: bold;\">查看</a>/<a href=\"javascript:\" style=\"color: red; font-weight: bold;\">删除</a></td></tr>");
             }
             sb.append("\t</table>\n" +
                     "\t<a href=\"Admin_addNews.html\"><input id=\"addNews\" name=\"addNews\" type=\"button\" value=\"添加新报刊\"></a>\n" +

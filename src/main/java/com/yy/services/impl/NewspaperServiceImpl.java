@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import java.util.List;
+import java.util.Map;
 
 public class NewspaperServiceImpl implements NewspaperServiceMapper {
     private SqlSessionFactory sqlSessionFactory = myBatisUtils.getSqlSessionFactory();
@@ -22,5 +23,10 @@ public class NewspaperServiceImpl implements NewspaperServiceMapper {
     @Override
     public Integer addNews(Newspaper newspaper) {
         return getSqlSession().getMapper(NewspaperMapper.class).addNews(newspaper);
+    }
+
+    @Override
+    public Integer updateNews(Map map) {
+        return getSqlSession().getMapper(NewspaperMapper.class).updateNews(map);
     }
 }

@@ -10,7 +10,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class NewspaperMapper_test {
     private SqlSession sqlSession;
@@ -46,6 +48,18 @@ public class NewspaperMapper_test {
     }
 
 
+    @Test
+    public void updateNews_test(){
+        Map map = new HashMap();
+        map.put("id",5);
+        map.put("name","《歪歪日报》");
+        map.put("content","YY语音最早用于魔兽玩家的团队语音指挥通话，逐渐吸引了部分传奇私服用户，" +
+                "最后发展为穿越火线游戏用户必备的团队语音工具，笔者曾在穿越火线游戏中目测，99%的战队收人广告后面都挂着YY语音ID。" +
+                "2009年初YY娱乐用户已经形成了可以和游戏用户抗衡的用户群，YY语音的娱乐公会开始逐步超越游戏公会，人气也日渐增长。时至今日，" +
+                "YY语音已经成为集合团队语音、好友聊天、视频功能、频道K歌、视频直播、YY群聊天、应用游戏、在线影视等功能为一体的综合型即时通讯软件。\n" +
+                "由于YY语音的高清晰、操作方便等特点，已吸引越来越多的教育行业入驻YY，开展网络教育平台，比较著名的有外语教学频道、平面设计教学频道、心理学教育频道等等！");
+        System.out.println(mapper.updateNews(map));
+    }
 
     @After
     public void destroy(){

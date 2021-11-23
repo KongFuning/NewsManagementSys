@@ -13,4 +13,8 @@
         insert into newspaper (id,name,publisher,cycle,offer,content,classify_id)
         values(#{id},#{name},#{publisher},#{cycle},#{offer},#{content},#{classify_id});
     </insert>
+
+    <update id="updateNews" parameterType="map">
+        update newspaper set name=#{name},content=#{content} where id=#{id};
+    </update>
 </mapper>
