@@ -62,7 +62,7 @@ public class AddUserServlet extends HttpServlet {
 
             sqlSession.getMapper(UserMapper.class).addUserAll(user);
             resp.getWriter().print("<script language=\"javascript\">alert(\"添加成功！\");" +
-                    "location.href='AdminMain.jsp'</script>");
+                    "location.href='/adminMainServlet'</script>");
         }
 
         //释放SqlSession

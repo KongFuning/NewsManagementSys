@@ -50,4 +50,9 @@ public class OrdersServiceImpl implements OrdersServiceMapper {
     public Integer orderNew(Map map) {
         return getSqlSession().getMapper(OrdersMapper.class).orderNew(map);
     }
+
+    @Override
+    public Integer cancelOrder(Map map) {
+        return getSqlSession().getMapper(OrdersMapper.class).cancelOrder(map);
+    }
 }

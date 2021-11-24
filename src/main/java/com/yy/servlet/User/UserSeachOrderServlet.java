@@ -57,7 +57,7 @@ public class UserSeachOrderServlet extends HttpServlet {
                         newspaper.getPublisher()+"</td><td>"+newspaper.getCycle()+
                         "</td><td>"+newspaper.getOffer()+"</td><td>"+newspaper.getContent()+
                         "</td><td>"+newspaper.getClassify_id()+
-                        "</td><td><a href=\"javascript:\" style=\"color: green; font-weight: bold;\">查看</a>/<a href=\"javascript:\" style=\"color: red; font-weight: bold;\">取消订阅</a></td></tr>");
+                        "</td><td><a href=\"/userSeeNewsServlet?id="+newspaper.getId()+"\" style=\"color: green; font-weight: bold;\">查看</a>/<a href=\"/ConfirmCancelOrderServlet?id="+newspaper.getId()+"\" style=\"color: red; font-weight: bold;\">取消订阅</a></td></tr>");
             }
             sb.append("</table>\n" +
                     "\t</body>\n" +

@@ -14,4 +14,7 @@ public interface NewspaperServiceMapper {
 
     //更新报刊
     Integer updateNews(Map map);
+
+    //根据报刊id删除报刊
+    Integer deleteNewsById(int id);
 }

@@ -78,6 +78,13 @@ public class OrdersMapper_test {
         System.out.println(mapper.orderNew(map));
     }
 
+    @Test
+    public void cancelOrder_test(){
+        Map map = new HashMap();
+        map.put("user_id",19);
+        map.put("news_id",6);
+        System.out.println(mapper.cancelOrder(map));
+    }
 
     @After
     public void destroy(){

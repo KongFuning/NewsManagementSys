@@ -49,7 +49,7 @@ public class AddNewsServlet extends HttpServlet {
         newspaper.setClassify_id(depart);
         sqlSession.getMapper(NewspaperMapper.class).addNews(newspaper);
         resp.getWriter().print("<script language=\"javascript\">alert(\"添加成功！\");" +
-                "location.href='AdminMain.jsp'</script>");
+                "location.href='/adminMainServlet'</script>");
 
         //释放SqlSession
         sqlSession.close();

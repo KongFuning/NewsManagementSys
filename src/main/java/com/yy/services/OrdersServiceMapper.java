@@ -28,4 +28,7 @@ public interface OrdersServiceMapper {
 
     //某用户根据报刊id订阅报刊
     Integer orderNew(Map map);
+
+    //删除某个用户订阅的某个报刊
+    Integer cancelOrder(Map map);
 }

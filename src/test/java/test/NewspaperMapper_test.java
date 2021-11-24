@@ -61,6 +61,10 @@ public class NewspaperMapper_test {
         System.out.println(mapper.updateNews(map));
     }
 
+    @Test
+    public void deleteNewsById_test(){
+        System.out.println(mapper.deleteNewsById(7));;
+    }
     @After
     public void destroy(){
         sqlSession.close();

@@ -32,4 +32,8 @@
     <insert id="orderNew" parameterType="map">
         insert into orders (user_id,news_id) values(#{user_id},#{news_id});
     </insert>
+
+    <delete id="cancelOrder" parameterType="map">
+        delete from orders where user_id=#{user_id} and news_id=#{news_id};
+    </delete>
 </mapper>

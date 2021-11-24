@@ -29,4 +29,9 @@ public class NewspaperServiceImpl implements NewspaperServiceMapper {
     public Integer updateNews(Map map) {
         return getSqlSession().getMapper(NewspaperMapper.class).updateNews(map);
     }
+
+    @Override
+    public Integer deleteNewsById(int id) {
+        return getSqlSession().getMapper(NewspaperMapper.class).deleteNewsById(id);
+    }
 }
