@@ -1,8 +1,11 @@
 package com.yy.servlet.Admin;
 
+import com.yy.dao.NewspaperMapper;
 import com.yy.pojo.AdminUser;
 import com.yy.services.impl.NewspaperServiceImpl;
 import com.yy.services.impl.OrdersServiceImpl;
+import com.yy.utils.myBatisUtils;
+import org.apache.ibatis.session.SqlSession;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +20,7 @@ import java.util.Map;
 
 @WebServlet("/updateNewsServlet")
 public class UpdateNewsServlet extends HttpServlet {
-    NewspaperServiceImpl newspaperService = new NewspaperServiceImpl();
+//    NewspaperServiceImpl newspaperService = new NewspaperServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req,resp);
@@ -25,6 +28,7 @@ public class UpdateNewsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        SqlSession sqlSession = myBatisUtils.getSqlSessionFactory().openSession(true);
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
 
@@ -40,7 +44,7 @@ public class UpdateNewsServlet extends HttpServlet {
             map.put("id",id);
             map.put("name",newsName);
             map.put("content",newsContent);
-            if(newspaperService.updateNews(map) != 0){
+            if(sqlSession.getMapper(NewspaperMapper.class).updateNews(map) != 0){
                 //更新成功
                 resp.getWriter().print("<script language=\"javascript\">alert(\"更新成功！\");" +
                         "location.href=\"/seeNewsServlet?id="+id+"\"</script>");
@@ -56,7 +60,7 @@ public class UpdateNewsServlet extends HttpServlet {
         }
 
         //释放SqlSession
-        newspaperService.getSqlSession().close();
+        sqlSession.close();
 
     }
 }

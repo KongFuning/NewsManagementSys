@@ -1,7 +1,10 @@
 package com.yy.servlet.Admin;
 
+import com.yy.dao.OrdersMapper;
 import com.yy.pojo.AdminUser;
 import com.yy.services.impl.OrdersServiceImpl;
+import com.yy.utils.myBatisUtils;
+import org.apache.ibatis.session.SqlSession;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +16,7 @@ import java.io.IOException;
 
 @WebServlet("/seeNewsServlet")
 public class SeeNewsServlet extends HttpServlet {
-    OrdersServiceImpl ordersService = new OrdersServiceImpl();
+//    OrdersServiceImpl ordersService = new OrdersServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req,resp);
@@ -21,6 +24,7 @@ public class SeeNewsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        SqlSession sqlSession = myBatisUtils.getSqlSessionFactory().openSession(true);
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
 
@@ -46,11 +50,11 @@ public class SeeNewsServlet extends HttpServlet {
                     "\t<table>\n" +
                     "\t\t<tr style=\"text-align: left;\">\n" +
                     "\t\t\t<td><label>报刊名：</label></td>\n" +
-                    "\t\t\t<td><input type=\"text\" class=\"input\" id=\"newsName\" name=\"newsName\" value=\""+ordersService.getNewspaperByNewsId(id).getName()+"\"></td>\n" +
+                    "\t\t\t<td><input type=\"text\" class=\"input\" id=\"newsName\" name=\"newsName\" value=\""+sqlSession.getMapper(OrdersMapper.class).getNewspaperByNewsId(id).getName()+"\"></td>\n" +
                     "\t\t</tr>\n" +
                     "\t\t<tr>\n" +
                     "\t\t\t<td><label>内容：</label></td>\n" +
-                    "\t\t\t<td><textarea class=\"input\" style=\"width: 400px; height: 300px;\" id=\"newsContent\" name=\"newsContent\">"+ordersService.getNewspaperByNewsId(id).getContent()+"</textarea></td>\n" +
+                    "\t\t\t<td><textarea class=\"input\" style=\"width: 400px; height: 300px;\" id=\"newsContent\" name=\"newsContent\">"+sqlSession.getMapper(OrdersMapper.class).getNewspaperByNewsId(id).getContent()+"</textarea></td>\n" +
                     "\t\t</tr>\n" +
                     "\t\t<tr>\n" +
                     "\t\t\t<td colspan=\"2\"><input name=\"addNews\" type=\"submit\" value=\"修改\"  class=\"btn\"></td>\n" +
@@ -67,6 +71,6 @@ public class SeeNewsServlet extends HttpServlet {
 
 
         //释放SqlSession
-        ordersService.getSqlSession().close();
+        sqlSession.close();
     }
 }

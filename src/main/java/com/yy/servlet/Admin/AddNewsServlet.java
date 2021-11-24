@@ -1,9 +1,12 @@
 package com.yy.servlet.Admin;
 
+import com.yy.dao.NewspaperMapper;
 import com.yy.pojo.Newspaper;
 import com.yy.pojo.User;
 import com.yy.services.impl.NewspaperServiceImpl;
 import com.yy.services.impl.UserServiceImpl;
+import com.yy.utils.myBatisUtils;
+import org.apache.ibatis.session.SqlSession;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +18,7 @@ import java.io.IOException;
 //管理员添加新报刊
 @WebServlet("/addNewsServlet")
 public class AddNewsServlet extends HttpServlet {
-    private NewspaperServiceImpl newspaperService = new NewspaperServiceImpl();
+//    private NewspaperServiceImpl newspaperService = new NewspaperServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req,resp);
@@ -23,6 +26,8 @@ public class AddNewsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        SqlSession sqlSession = myBatisUtils.getSqlSessionFactory().openSession(true);
+
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
 
@@ -42,11 +47,11 @@ public class AddNewsServlet extends HttpServlet {
         newspaper.setOffer(offer);
         newspaper.setContent(content);
         newspaper.setClassify_id(depart);
-        newspaperService.addNews(newspaper);
+        sqlSession.getMapper(NewspaperMapper.class).addNews(newspaper);
         resp.getWriter().print("<script language=\"javascript\">alert(\"添加成功！\");" +
                 "location.href='AdminMain.jsp'</script>");
 
         //释放SqlSession
-        newspaperService.getSqlSession().close();
+        sqlSession.close();
     }
 }

@@ -1,7 +1,11 @@
 package com.yy.servlet.User;
 
+import com.yy.dao.UserMapper;
 import com.yy.pojo.User;
 import com.yy.services.impl.UserServiceImpl;
+import com.yy.utils.myBatisUtils;
+import org.apache.ibatis.session.SqlSession;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,8 +17,7 @@ import java.io.IOException;
 //普通用户确认修改个人信息模块
 @WebServlet("/confirmUpdateUserInfoServlet")
 public class ConfirmUpdateUserInfoServlet extends HttpServlet {
-
-    UserServiceImpl userService = new UserServiceImpl();
+//    UserServiceImpl userService = new UserServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req,resp);
@@ -22,6 +25,7 @@ public class ConfirmUpdateUserInfoServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        SqlSession sqlSession = myBatisUtils.getSqlSessionFactory().openSession(true);
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
 
@@ -56,7 +60,7 @@ public class ConfirmUpdateUserInfoServlet extends HttpServlet {
         user1.setUser_address(address);
         user1.setDepart_id(departId);
 
-        Integer result = userService.updateUser(user1);
+        Integer result = sqlSession.getMapper(UserMapper.class).updateUser(user1);
         if(result != null){
             //修改成功
             resp.getWriter().print("<script language=\"javascript\">alert(\"修改成功,请重新登录！\");" +
@@ -68,6 +72,6 @@ public class ConfirmUpdateUserInfoServlet extends HttpServlet {
         }
 
         //释放SqlSession
-        userService.getSqlSession().close();
+        sqlSession.close();
     }
 }

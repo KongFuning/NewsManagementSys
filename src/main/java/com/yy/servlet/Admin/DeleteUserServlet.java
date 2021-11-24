@@ -1,7 +1,10 @@
 package com.yy.servlet.Admin;
 
+import com.yy.dao.UserMapper;
 import com.yy.pojo.AdminUser;
 import com.yy.services.impl.UserServiceImpl;
+import com.yy.utils.myBatisUtils;
+import org.apache.ibatis.session.SqlSession;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +16,7 @@ import java.io.IOException;
 
 @WebServlet("/deleteUserServlet")
 public class DeleteUserServlet extends HttpServlet {
-    UserServiceImpl userService = new UserServiceImpl();
+//    UserServiceImpl userService = new UserServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req,resp);
@@ -21,6 +24,7 @@ public class DeleteUserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        SqlSession sqlSession = myBatisUtils.getSqlSessionFactory().openSession(true);
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
 
@@ -32,7 +36,7 @@ public class DeleteUserServlet extends HttpServlet {
             int id = Integer.parseInt(req.getParameter("id"));
             System.out.println("你要删除的用户id: " + id);
             //根据id删除用户
-            if(userService.deleteUserById(id) != 0){
+            if(sqlSession.getMapper(UserMapper.class).deleteUserById(id) != 0){
                 //删除成功
                 System.out.println("删除第"+id+"号成功！");
                 //重定向至首页
@@ -49,6 +53,6 @@ public class DeleteUserServlet extends HttpServlet {
         }
 
         //释放SqlSession
-        userService.getSqlSession().close();
+        sqlSession.close();
     }
 }

@@ -1,7 +1,11 @@
 package com.yy.servlet.User;
 
+import com.yy.dao.DepartmentMapper;
 import com.yy.pojo.User;
 import com.yy.services.impl.DepartmentServiceImpl;
+import com.yy.utils.myBatisUtils;
+import org.apache.ibatis.session.SqlSession;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +17,7 @@ import java.io.IOException;
 //普通用户修改个人信息模块
 @WebServlet("/updateUserInfoServlet")
 public class UpdateUserInfoServlet extends HttpServlet {
-    DepartmentServiceImpl departmentService = new DepartmentServiceImpl();
+//    DepartmentServiceImpl departmentService = new DepartmentServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -22,6 +26,7 @@ public class UpdateUserInfoServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        SqlSession sqlSession = myBatisUtils.getSqlSessionFactory().openSession(true);
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
 
@@ -80,7 +85,7 @@ public class UpdateUserInfoServlet extends HttpServlet {
                     "\t\t\t\t\t\t<td>部门： </td>\n" +
                     "\t\t\t\t\t\t<td>\n" +
                     "\t\t\t\t\t\t\t<select id=\"userOrAdmin\" name=\"userOrAdmin\">\n" +
-                    "\t\t\t\t\t\t\t\t<option value=\"none\" selected disabled hidden>"+departmentService.getDepartName(user.getDepart_id())+"</option>" +
+                    "\t\t\t\t\t\t\t\t<option value=\"none\" selected disabled hidden>"+sqlSession.getMapper(DepartmentMapper.class).getDepartName(user.getDepart_id())+"</option>" +
                     "\t\t\t\t\t\t\t\t<option value=\"1\">A部门</option>\n" +
                     "\t\t\t\t\t\t\t\t<option value=\"2\">B部门</option>\n" +
                     "\t\t\t\t\t\t\t\t<option value=\"3\">C部门</option>\n" +
@@ -115,7 +120,7 @@ public class UpdateUserInfoServlet extends HttpServlet {
         }
 
         //释放SqlSession
-        departmentService.getSqlSession().close();
+        sqlSession.close();
 
     }
 }

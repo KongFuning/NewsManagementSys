@@ -1,7 +1,10 @@
 package com.yy.servlet.Admin;
 
+import com.yy.dao.UserMapper;
 import com.yy.pojo.User;
 import com.yy.services.impl.UserServiceImpl;
+import com.yy.utils.myBatisUtils;
+import org.apache.ibatis.session.SqlSession;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +16,7 @@ import java.io.IOException;
 //管理员添加新用户
 @WebServlet("/addUserServlet")
 public class AddUserServlet extends HttpServlet {
-    private UserServiceImpl userService = new UserServiceImpl();
+//    private UserServiceImpl userService = new UserServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req,resp);
@@ -21,6 +24,7 @@ public class AddUserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        SqlSession sqlSession = myBatisUtils.getSqlSessionFactory().openSession(true);
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
 
@@ -36,7 +40,7 @@ public class AddUserServlet extends HttpServlet {
         System.out.println(userName + " " + passWord + " " + realName + " " + cardId + " " + phone + " "
         + address + " " + depart);
 
-        User userByName = userService.getUserByName(userName);
+        User userByName = sqlSession.getMapper(UserMapper.class).getUserByName(userName);
         //先判断用户名和密码是否为空
         if(userName.equals("") || passWord.equals("")){
             resp.getWriter().print("<script language=\"javascript\">alert(\"用户名或密码为空！\");" +
@@ -56,13 +60,13 @@ public class AddUserServlet extends HttpServlet {
             user.setUser_address(address);
             user.setDepart_id(depart);
 
-            userService.addUserAll(user);
+            sqlSession.getMapper(UserMapper.class).addUserAll(user);
             resp.getWriter().print("<script language=\"javascript\">alert(\"添加成功！\");" +
                     "location.href='AdminMain.jsp'</script>");
         }
 
         //释放SqlSession
-        userService.getSqlSession().close();
+        sqlSession.close();
 
     }
 }

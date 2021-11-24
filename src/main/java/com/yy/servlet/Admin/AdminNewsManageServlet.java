@@ -1,8 +1,12 @@
 package com.yy.servlet.Admin;
 
+import com.yy.dao.NewspaperMapper;
 import com.yy.pojo.AdminUser;
 import com.yy.pojo.Newspaper;
 import com.yy.services.impl.NewspaperServiceImpl;
+import com.yy.utils.myBatisUtils;
+import org.apache.ibatis.session.SqlSession;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +19,7 @@ import java.util.List;
 //管理员报刊管理模块
 @WebServlet("/adminNewsManageServlet")
 public class AdminNewsManageServlet extends HttpServlet {
-    NewspaperServiceImpl newspaperService = new NewspaperServiceImpl();
+//    NewspaperServiceImpl newspaperService = new NewspaperServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req,resp);
@@ -23,6 +27,7 @@ public class AdminNewsManageServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        SqlSession sqlSession = myBatisUtils.getSqlSessionFactory().openSession(true);
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
 
@@ -31,7 +36,7 @@ public class AdminNewsManageServlet extends HttpServlet {
         AdminUser adminUser = (AdminUser)session.getAttribute("adminUser");
 
         //获取报刊集合
-        List<Newspaper> newspapers = newspaperService.getAllNewspaper();
+        List<Newspaper> newspapers = sqlSession.getMapper(NewspaperMapper.class).getAllNewspaper();
         StringBuilder sb = new StringBuilder(); // 生成主要页面
         //如果adminUser不为空，则表示会话生效
         if(adminUser != null){
@@ -65,6 +70,6 @@ public class AdminNewsManageServlet extends HttpServlet {
         }
 
         //释放SqlSession
-        newspaperService.getSqlSession().close();
+        sqlSession.close();
     }
 }

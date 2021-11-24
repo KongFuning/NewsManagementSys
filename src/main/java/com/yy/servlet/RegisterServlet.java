@@ -1,7 +1,11 @@
 package com.yy.servlet;
 
+import com.yy.dao.UserMapper;
 import com.yy.pojo.User;
 import com.yy.services.impl.UserServiceImpl;
+import com.yy.utils.myBatisUtils;
+import org.apache.ibatis.session.SqlSession;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +16,7 @@ import java.io.IOException;
 //注册模块
 @WebServlet("/registerServlet")
 public class RegisterServlet extends HttpServlet {
-    private UserServiceImpl userService = new UserServiceImpl();
+//    private UserServiceImpl userService = new UserServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req,resp);
@@ -20,6 +24,7 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        SqlSession sqlSession = myBatisUtils.getSqlSessionFactory().openSession(true);
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
 
@@ -29,7 +34,7 @@ public class RegisterServlet extends HttpServlet {
 
         //注册进用户数据库！
         //1.先判断数据库中有没有该用户
-        User user = userService.getUserByName(userName);
+        User user = sqlSession.getMapper(UserMapper.class).getUserByName(userName);
         System.out.println(user);
         if(user != null){
             //该用户已存在
@@ -40,12 +45,12 @@ public class RegisterServlet extends HttpServlet {
             User userNew = new User();
             userNew.setUser_name(userName);
             userNew.setUser_password(passWord);
-            userService.addUser(userNew);
+            sqlSession.getMapper(UserMapper.class).addUser(userNew);
             resp.getWriter().write("注册成功！ 3秒后将返回主页...");
             //定时跳转
             resp.setHeader("Refresh", "3;URL=index.html");
         }
         //释放SqlSession资源
-        userService.getSqlSession().close();
+        sqlSession.close();
     }
 }

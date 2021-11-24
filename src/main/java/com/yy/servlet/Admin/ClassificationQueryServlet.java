@@ -1,6 +1,9 @@
 package com.yy.servlet.Admin;
 
 
+import com.yy.dao.DepartmentMapper;
+import com.yy.dao.OrdersMapper;
+import com.yy.dao.UserMapper;
 import com.yy.pojo.AdminUser;
 import com.yy.pojo.Department;
 import com.yy.pojo.Newspaper;
@@ -8,6 +11,9 @@ import com.yy.pojo.User;
 import com.yy.services.impl.DepartmentServiceImpl;
 import com.yy.services.impl.OrdersServiceImpl;
 import com.yy.services.impl.UserServiceImpl;
+import com.yy.utils.myBatisUtils;
+import org.apache.ibatis.session.SqlSession;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,9 +26,9 @@ import java.util.List;
 //管理员分类查询模块
 @WebServlet("/classificationQueryServlet")
 public class ClassificationQueryServlet extends HttpServlet {
-    OrdersServiceImpl ordersService = new OrdersServiceImpl();
-    UserServiceImpl userService = new UserServiceImpl();
-    DepartmentServiceImpl departmentService = new DepartmentServiceImpl();
+//    OrdersServiceImpl ordersService = new OrdersServiceImpl();
+//    UserServiceImpl userService = new UserServiceImpl();
+//    DepartmentServiceImpl departmentService = new DepartmentServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req,resp);
@@ -30,6 +36,7 @@ public class ClassificationQueryServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        SqlSession sqlSession = myBatisUtils.getSqlSessionFactory().openSession(true);
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
 
@@ -45,7 +52,7 @@ public class ClassificationQueryServlet extends HttpServlet {
             //1.按人员查询
             if(classify == 1){
                 //先查出所有订阅了报刊的用户
-                List<Integer> users = ordersService.getAllUsers();
+                List<Integer> users = sqlSession.getMapper(OrdersMapper.class).getAllUsers();
                 sb.append("<!DOCTYPE html>\n" +
                         "<html>\n" +
                         "<head>\n" +
@@ -56,9 +63,9 @@ public class ClassificationQueryServlet extends HttpServlet {
                         "<body>\n" +
                         "\t<table id=\"topic_table\">");
                 for (Integer userId : users) {
-                    List<Newspaper> newspaperByUserId = ordersService.getNewspaperByUserId(userId);
+                    List<Newspaper> newspaperByUserId = sqlSession.getMapper(OrdersMapper.class).getNewspaperByUserId(userId);
                     sb.append("<tr><td colspan=\"2\" style=\"font-weight:bold;text-align: left\" >用户："+
-                            userService.getUserById(userId).getUser_name()+"</td></tr>\n" +
+                            sqlSession.getMapper(UserMapper.class).getUserById(userId).getUser_name()+"</td></tr>\n" +
                             "\t\t<tr><th>报刊代号</th><th>报刊名</th>");
                     for (Newspaper newspaper : newspaperByUserId) {
                         sb.append("<tr><td name=\"id\">"+newspaper.getId()+
@@ -75,7 +82,7 @@ public class ClassificationQueryServlet extends HttpServlet {
             //2.按报刊查询
             if(classify == 2){
                 //先查出所有订阅了的报刊的id
-                List<Integer> allNewsId = ordersService.getAllNewsId();
+                List<Integer> allNewsId = sqlSession.getMapper(OrdersMapper.class).getAllNewsId();
                 sb.append("<!DOCTYPE html>\n" +
                         "<html>\n" +
                         "<head>\n" +
@@ -87,9 +94,9 @@ public class ClassificationQueryServlet extends HttpServlet {
                         "\t<table id=\"topic_table\">\n");
                 for (Integer newsId : allNewsId) {
                     sb.append("\t\t<tr><td colspan=\"2\" style=\"font-weight:bold;text-align: left\" >报刊："+
-                            ordersService.getNewspaperByNewsId(newsId).getName()+"</td></tr>");
+                            sqlSession.getMapper(OrdersMapper.class).getNewspaperByNewsId(newsId).getName()+"</td></tr>");
                     sb.append("\t\t<tr><th>id</th><th>用户名</th>");
-                    List<User> users = ordersService.getAllUsersOrderOneNew(newsId);
+                    List<User> users = sqlSession.getMapper(OrdersMapper.class).getAllUsersOrderOneNew(newsId);
                     for (User user : users) {
                         sb.append("<tr><td name=\"id\">"+user.getId()+
                                 "</td><td name=\"name\">"+user.getUser_name()+"</td></tr>");
@@ -104,7 +111,7 @@ public class ClassificationQueryServlet extends HttpServlet {
             //3.按部门查询
             if(classify == 3){
                 //先查出所有的部门
-                List<Department> allDepartment = departmentService.getAllDepartment();
+                List<Department> allDepartment = sqlSession.getMapper(DepartmentMapper.class).getAllDepartment();
                 sb.append("<!DOCTYPE html>\n" +
                         "<html>\n" +
                         "<head>\n" +
@@ -117,12 +124,12 @@ public class ClassificationQueryServlet extends HttpServlet {
                 for (Department department : allDepartment) {
                     sb.append("<tr><td colspan=\"2\" style=\"font-weight:bold;font-size:30px;text-align: left\" >部门："+
                             department.getName()+"</td></tr>");
-                    List<User> allUserByDepartId = userService.getAllUserByDepartId(department.getId());
+                    List<User> allUserByDepartId = sqlSession.getMapper(UserMapper.class).getAllUserByDepartId(department.getId());
                     for (User user : allUserByDepartId) {
                         sb.append("\t<tr><td colspan=\"2\" style=\"font-weight:bold;text-align: left\" >用户："+
                                 user.getUser_name()+"</td></tr>");
                         sb.append("\t<tr><th>报刊代号</th><th>报刊名</th>");
-                        List<Newspaper> newspaperByUserId = ordersService.getNewspaperByUserId(user.getId());
+                        List<Newspaper> newspaperByUserId = sqlSession.getMapper(OrdersMapper.class).getNewspaperByUserId(user.getId());
                         for (Newspaper newspaper : newspaperByUserId) {
                             sb.append("<tr><td name=\"id\">"+newspaper.getId()+
                                     "</td><td name=\"name\">"+newspaper.getName()+"</td></tr>\n\n\n");
@@ -141,8 +148,6 @@ public class ClassificationQueryServlet extends HttpServlet {
         }
 
         //释放SqlSession
-        ordersService.getSqlSession().close();
-        userService.getSqlSession().close();
-        departmentService.getSqlSession().close();
+        sqlSession.close();
     }
 }

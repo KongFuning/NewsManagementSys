@@ -1,8 +1,11 @@
 package com.yy.servlet.Admin;
 
+import com.yy.dao.UserMapper;
 import com.yy.pojo.AdminUser;
 import com.yy.pojo.User;
 import com.yy.services.impl.UserServiceImpl;
+import com.yy.utils.myBatisUtils;
+import org.apache.ibatis.session.SqlSession;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +19,7 @@ import java.util.List;
 //管理员用户管理模块
 @WebServlet("/adminUserManageServlet")
 public class AdminUserManageServlet extends HttpServlet {
-    private UserServiceImpl userService = new UserServiceImpl();
+//    private UserServiceImpl userService = new UserServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req,resp);
@@ -24,6 +27,7 @@ public class AdminUserManageServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        SqlSession sqlSession = myBatisUtils.getSqlSessionFactory().openSession(true);
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
 
@@ -32,7 +36,7 @@ public class AdminUserManageServlet extends HttpServlet {
         AdminUser adminUser = (AdminUser)session.getAttribute("adminUser");
 
         //获取用户集合
-        List<User> allUser = userService.getAllUser();
+        List<User> allUser = sqlSession.getMapper(UserMapper.class).getAllUser();
         StringBuilder sb = new StringBuilder(); // 生成主要页面
         //如果adminUser不为空，则表示会话生效
         if(adminUser != null){
@@ -64,6 +68,6 @@ public class AdminUserManageServlet extends HttpServlet {
         }
 
         //释放SqlSession
-        userService.getSqlSession().close();
+        sqlSession.close();
     }
 }

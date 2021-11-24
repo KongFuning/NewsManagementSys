@@ -1,7 +1,10 @@
 package com.yy.servlet.User;
 
+import com.yy.dao.OrdersMapper;
 import com.yy.pojo.User;
 import com.yy.services.impl.OrdersServiceImpl;
+import com.yy.utils.myBatisUtils;
+import org.apache.ibatis.session.SqlSession;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +19,7 @@ import java.util.Map;
 //普通用户确认订阅报刊模块
 @WebServlet("/userConfirmSubscribeNewsServlet")
 public class UserConfirmSubscribeNewsServlet extends HttpServlet {
-    OrdersServiceImpl ordersService = new OrdersServiceImpl();
+//    OrdersServiceImpl ordersService = new OrdersServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req,resp);
@@ -24,6 +27,7 @@ public class UserConfirmSubscribeNewsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        SqlSession sqlSession = myBatisUtils.getSqlSessionFactory().openSession(true);
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
 
@@ -38,10 +42,10 @@ public class UserConfirmSubscribeNewsServlet extends HttpServlet {
             for (String s : id) {
                 map.put("user_id",user.getId());
                 map.put("news_id",Integer.parseInt(s));
-                if(ordersService.checkOrder(map) == null){ //未订阅的报刊 才订阅
+                if(sqlSession.getMapper(OrdersMapper.class).checkOrder(map) == null){ //未订阅的报刊 才订阅
                     System.out.println("报刊：" + s + " 未订阅");
                     //订阅报刊
-                    ordersService.orderNew(map);
+                    sqlSession.getMapper(OrdersMapper.class).orderNew(map);
                 }else {
                     //已订阅的报刊 就不订阅了
                     continue;
@@ -56,6 +60,6 @@ public class UserConfirmSubscribeNewsServlet extends HttpServlet {
         }
 
         //释放SqlSession
-        ordersService.getSqlSession().close();
+        sqlSession.close();
     }
 }

@@ -1,8 +1,12 @@
 package com.yy.servlet.User;
 
+import com.yy.dao.OrdersMapper;
 import com.yy.pojo.Newspaper;
 import com.yy.pojo.User;
 import com.yy.services.impl.OrdersServiceImpl;
+import com.yy.utils.myBatisUtils;
+import org.apache.ibatis.session.SqlSession;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +19,7 @@ import java.util.List;
 //普通用户查询订阅模块
 @WebServlet("/userSeachOrderServlet")
 public class UserSeachOrderServlet extends HttpServlet {
-    OrdersServiceImpl ordersService = new OrdersServiceImpl();
+//    OrdersServiceImpl ordersService = new OrdersServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req, resp);
@@ -23,6 +27,7 @@ public class UserSeachOrderServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        SqlSession sqlSession = myBatisUtils.getSqlSessionFactory().openSession(true);
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
 
@@ -32,7 +37,7 @@ public class UserSeachOrderServlet extends HttpServlet {
         System.out.println(user);
 
         //根据当前user_id获取订阅报刊
-        List<Newspaper> newspaperByUserId = ordersService.getNewspaperByUserId(user.getId());
+        List<Newspaper> newspaperByUserId = sqlSession.getMapper(OrdersMapper.class).getNewspaperByUserId(user.getId());
         //生成页面
         StringBuilder sb = new StringBuilder();
 
@@ -64,6 +69,6 @@ public class UserSeachOrderServlet extends HttpServlet {
         }
 
         //释放SqlSession
-        ordersService.getSqlSession().close();
+        sqlSession.close();
     }
 }
